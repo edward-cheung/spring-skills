@@ -21,5 +21,7 @@
     <modules>
         <module>l2-cache</module>
         <module>redisson-app</module>
+        <module>zookeeper-app</module>
+        <module>es-app</module>
     </modules>
 </project>
