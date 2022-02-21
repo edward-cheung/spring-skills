@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/db/code-generator-01/code-generator-01.iml" filepath="$PROJECT_DIR$/db/code-generator-01/code-generator-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db/code-generator-02/code-generator-02.iml" filepath="$PROJECT_DIR$/db/code-generator-02/code-generator-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/custom-req-log/custom-req-log.iml" filepath="$PROJECT_DIR$/web/custom-req-log/custom-req-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/custom-thread-pool/custom-thread-pool.iml" filepath="$PROJECT_DIR$/util/custom-thread-pool/custom-thread-pool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db/db.iml" filepath="$PROJECT_DIR$/db/db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/es-app/es-app.iml" filepath="$PROJECT_DIR$/middleware/es-app/es-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/guava-app/guava-app.iml" filepath="$PROJECT_DIR$/util/guava-app/guava-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/http-conn-pool/http-conn-pool.iml" filepath="$PROJECT_DIR$/util/http-conn-pool/http-conn-pool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/id-worker/id-worker.iml" filepath="$PROJECT_DIR$/util/id-worker/id-worker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/l2-cache/l2-cache.iml" filepath="$PROJECT_DIR$/middleware/l2-cache/l2-cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/mail/mail.iml" filepath="$PROJECT_DIR$/util/mail/mail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/middleware.iml" filepath="$PROJECT_DIR$/middleware/middleware.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db/persistence/persistence.iml" filepath="$PROJECT_DIR$/db/persistence/persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/redisson-app/redisson-app.iml" filepath="$PROJECT_DIR$/middleware/redisson-app/redisson-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/rest-template/rest-template.iml" filepath="$PROJECT_DIR$/gateway/rest-template/rest-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-skills.iml" filepath="$PROJECT_DIR$/spring-skills.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/util.iml" filepath="$PROJECT_DIR$/util/util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/validation/validation.iml" filepath="$PROJECT_DIR$/web/validation/validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/zookeeper-app/zookeeper-app.iml" filepath="$PROJECT_DIR$/middleware/zookeeper-app/zookeeper-app.iml" />
+    </modules>
+  </component>
+</project>

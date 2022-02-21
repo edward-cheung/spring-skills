@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c534848-dde0-4533-9d12-79af1f320305" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="userSettingsFile" value="E:\Projects\.m2\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="25Pv24HjNyQEaqPEvYVt2uNyI8q" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/custom-req-log/src/main/java/cn/edcheung/springskills/customreqlog" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Study\spring-skills\web\custom-req-log\src\main\java\cn\edcheung\springskills\customreqlog" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.edcheung.springskills.customreqlog.config" />
+      <recent name="cn.edcheung.customthreadpool" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.RestTemplateApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomReqLogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="custom-req-log" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.customreqlog.CustomReqLogApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomThreadPoolApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="custom-thread-pool" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.customthreadpool.CustomThreadPoolApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EsAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="es-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.middleware.esapp.EsAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GuavaAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="guava-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.util.guavaapp.GuavaAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="L2CacheApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="l2-cache" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.middleware.l2cache.L2CacheApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedissionAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="redisson-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.middleware.redissonapp.RedissionAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RestTemplateApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="rest-template" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.gateway.resttemplate.RestTemplateApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValidationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="validation" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.web.validation.ValidationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZookeeperAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zookeeper-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edcheung.springskills.middleware.zookeeperapp.ZookeeperAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringGeneralSettings">
+    <option name="allowAutoConfigurationMode" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\admin\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c534848-dde0-4533-9d12-79af1f320305" name="Default Changelist" comment="" />
+      <created>1645441327369</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645441327369</updated>
+      <workItem from="1645441332145" duration="4120000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
