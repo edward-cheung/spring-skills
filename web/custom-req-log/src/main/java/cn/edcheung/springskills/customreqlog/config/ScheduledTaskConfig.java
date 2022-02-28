@@ -8,7 +8,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 /**
- * Description ScheduledTaskConfig
+ * Description 计划任务配置
  *
  * @author zhangyi
  * @date 2020/12/8

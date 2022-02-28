@@ -41,7 +41,7 @@ public class RequestLogAspect {
     private static final Logger log = LoggerFactory.getLogger(RequestLogAspect.class);
 
     /**
-     * 自动注入HttpServletRequest对象
+     * 获取当前 HttpServletRequest 的第一种方式：自动注入HttpServletRequest对象
      */
 //    @Autowired
 //    private HttpServletRequest request;
@@ -83,7 +83,7 @@ public class RequestLogAspect {
             }
             // 类注解
             RequestLog clazzAnnotationRequestLog = getClazzAnnotationLog(joinPoint);
-
+            // 获取当前 HttpServletRequest 的第二种方式
             HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
             CloudOperationLog operationLog = new CloudOperationLog();
             // operationLog.setId(UUID.randomUUID().toString().replaceAll("-", "")); // 维护索引代价较大
@@ -159,7 +159,7 @@ public class RequestLogAspect {
                 operationLog.setOperationRequestException(ExceptionUtil.stacktraceToString(e));
             }
             if (methodAnnotationRequestLog.requestSaveDb()) {
-                // 保存日志到数据库
+                // 异步保存日志到数据库
                 log.info("保存日志到数据库");
             }
             log.info(operationLog.toString());
