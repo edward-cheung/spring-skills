@@ -1,6 +1,5 @@
 package cn.edcheung.springskills.customreqlog.config.asyncThreadPool;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -21,6 +20,5 @@ public class CustomAsyncUncaughtExceptionHandler implements AsyncUncaughtExcepti
     @Override
     public void handleUncaughtException(Throwable throwable, Method method, Object... params) {
         log.error("异步多线程执行异常。方法：[{}]，异常信息[{}] : {}", method, throwable.getMessage(), throwable);
-        String error = "异步多线程执行异常，方法：[" + method + "]：" + ExceptionUtil.stacktraceToString(throwable, 2000);
     }
 }
