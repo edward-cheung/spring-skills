@@ -11,7 +11,7 @@
 
 - gateway 网关
     - rest-template http请求转发网关
-    - netty-app netty转发
+    - netty-forward netty转发
 
 - util 工具
     - mail 邮件发送
@@ -25,3 +25,4 @@
     - redisson-app redisson应用
     - zookeeper-app zookeeper应用
     - es-app ES应用
+    - netty-app netty应用
