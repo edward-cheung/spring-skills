@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil {
 
-    private RedisUtil() {
-    }
-
     @SuppressWarnings("unchecked")
     private static RedisTemplate<String, Object> redisTemplate = SpringUtil.getBean("redisTemplate", RedisTemplate.class);
+
+    private RedisUtil() {
+    }
 
     /**
      * 设置有效时间

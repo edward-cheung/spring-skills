@@ -24,5 +24,6 @@
     - l2-cache 二级缓存并整合spring cache
     - redisson-app redisson应用
     - zookeeper-app zookeeper应用
+    - kafka-app kafka应用
     - es-app ES应用
     - netty-app netty应用
