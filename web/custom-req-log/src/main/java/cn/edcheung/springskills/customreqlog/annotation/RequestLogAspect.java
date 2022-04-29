@@ -66,8 +66,8 @@ public class RequestLogAspect {
     /**
      * 拦截异常操作
      *
-     * @param joinPoint
-     * @param e
+     * @param joinPoint 连接点
+     * @param e 异常
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfter(JoinPoint joinPoint, Exception e) {
@@ -186,7 +186,7 @@ public class RequestLogAspect {
      * 判断是否类注解，如果存在就获取
      */
     private RequestLog getClazzAnnotationLog(JoinPoint joinPoint) {
-        Class clazz = joinPoint.getTarget().getClass();
-        return (RequestLog) clazz.getAnnotation(RequestLog.class);
+        Class<?> clazz = joinPoint.getTarget().getClass();
+        return clazz.getAnnotation(RequestLog.class);
     }
 }
