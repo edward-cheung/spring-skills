@@ -17,12 +17,6 @@ public class SpringUtil implements ApplicationContextAware {
      */
     private static ApplicationContext applicationContext;
 
-    @Override
-    @Autowired
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringUtil.applicationContext = applicationContext;
-    }
-
     /**
      * 获取applicationContext
      *
@@ -30,6 +24,12 @@ public class SpringUtil implements ApplicationContextAware {
      */
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
+    }
+
+    @Override
+    @Autowired
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringUtil.applicationContext = applicationContext;
     }
 
     /**

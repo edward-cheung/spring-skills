@@ -63,6 +63,7 @@ public enum LogTypeEnum {
 
     private final int code;
     private final String title;
+
     LogTypeEnum(int code, String title) {
         this.code = code;
         this.title = title;

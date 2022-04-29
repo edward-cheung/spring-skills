@@ -3,16 +3,16 @@ singleServerConfig:
   database: 0
   password: root
   # 连接池大小
-  connectionPoolSize: 64
+  connectionPoolSize: 8
   # 最小空闲连接数
-  connectionMinimumIdleSize: 32
+  connectionMinimumIdleSize: 1
   # 连接空闲超时，单位：毫秒
-  idleConnectionTimeout: 1000
+  idleConnectionTimeout: 60000
   # 连接超时，单位：毫秒
-  connectTimeout: 10000
+  connectTimeout: 3000
   # 命令等待超时，单位：毫秒
-  timeout: 3000
+  timeout: 1000
   # 命令失败重试次数
-  retryAttempts: 3
+  retryAttempts: 1
   # 命令重试发送时间间隔，单位：毫秒
-  retryInterval: 1500
+  retryInterval: 1000

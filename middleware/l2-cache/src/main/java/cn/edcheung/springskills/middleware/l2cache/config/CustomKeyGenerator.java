@@ -20,7 +20,7 @@ public class CustomKeyGenerator implements KeyGenerator {
         if (methodName.startsWith("get")) {
             methodName = methodName.substring(3);
         } else if (methodName.startsWith("query")) {
-            methodName = methodName.substring(3);
+            methodName = methodName.substring(5);
         }
         return methodName;
     }
