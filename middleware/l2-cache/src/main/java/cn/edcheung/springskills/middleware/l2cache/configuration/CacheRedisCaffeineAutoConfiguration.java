@@ -11,6 +11,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
+import java.util.Objects;
+
 /**
  * Description CacheRedisCaffeineAutoConfiguration
  *
@@ -36,9 +38,10 @@ public class CacheRedisCaffeineAutoConfiguration {
     public RedisMessageListenerContainer redisMessageListenerContainer(RedisTemplate<Object, Object> redisTemplate,
                                                                        RedisCaffeineCacheManager redisCaffeineCacheManager) {
         RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
-        redisMessageListenerContainer.setConnectionFactory(redisTemplate.getConnectionFactory());
+        redisMessageListenerContainer.setConnectionFactory(Objects.requireNonNull(redisTemplate.getConnectionFactory()));
         CacheMessageListener cacheMessageListener = new CacheMessageListener(redisTemplate, redisCaffeineCacheManager);
-        redisMessageListenerContainer.addMessageListener(cacheMessageListener, new ChannelTopic(cacheRedisCaffeineProperties.getRedis().getTopic()));
+        redisMessageListenerContainer.addMessageListener(cacheMessageListener,
+                new ChannelTopic(cacheRedisCaffeineProperties.getRedis().getTopic()));
         return redisMessageListenerContainer;
     }
 }

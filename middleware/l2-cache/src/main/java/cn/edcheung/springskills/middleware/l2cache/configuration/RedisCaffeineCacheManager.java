@@ -30,7 +30,7 @@ public class RedisCaffeineCacheManager implements CacheManager {
 
     private RedisTemplate<Object, Object> redisTemplate;
 
-    private boolean dynamic = true;
+    private boolean dynamic;
 
     private Set<String> cacheNames;
 

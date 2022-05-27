@@ -144,8 +144,10 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
     public void clear() {
         // 先清除redis中缓存数据，然后清除caffeine中的缓存，避免短时间内如果先清除caffeine缓存后其他请求会再从redis里加载到caffeine中
         Set<Object> keys = redisTemplate.keys(this.name.concat(":"));
-        for (Object key : keys) {
-            redisTemplate.delete(key);
+        if (keys != null && keys.size() > 0) {
+            for (Object key : keys) {
+                redisTemplate.delete(key);
+            }
         }
 
         push(new CacheMessage(this.name, null));
@@ -178,26 +180,18 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
     private long getExpire() {
         long expire = defaultExpiration;
         Long cacheNameExpire = expires.get(this.name);
-        return cacheNameExpire == null ? expire : cacheNameExpire.longValue();
+        return cacheNameExpire == null ? expire : cacheNameExpire;
     }
 
     /**
-     * @param message
-     * @description 缓存变更时通知其他节点清理本地缓存
-     * @author fuwei.deng
-     * @date 2018年1月31日 下午3:20:28
-     * @version 1.0.0
+     * @param message 缓存变更时通知其他节点清理本地缓存
      */
     private void push(CacheMessage message) {
         redisTemplate.convertAndSend(topic, message);
     }
 
     /**
-     * @param key
-     * @description 清理本地缓存
-     * @author fuwei.deng
-     * @date 2018年1月31日 下午3:15:39
-     * @version 1.0.0
+     * @param key 清理本地缓存
      */
     public void clearLocal(Object key) {
         logger.debug("clear local cache, the key is : {}", key);
