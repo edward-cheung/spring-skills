@@ -12,7 +12,7 @@ import java.util.Enumeration;
 /**
  * Description ServerIPUtil
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/10/28
  * @since JDK 1.8
  */

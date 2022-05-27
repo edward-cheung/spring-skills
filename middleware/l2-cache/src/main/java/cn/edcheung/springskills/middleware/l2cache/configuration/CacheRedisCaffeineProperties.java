@@ -35,6 +35,54 @@ public class CacheRedisCaffeineProperties {
     private Redis redis = new Redis();
     private Caffeine caffeine = new Caffeine();
 
+    public Set<String> getCacheNames() {
+        return cacheNames;
+    }
+
+    public void setCacheNames(Set<String> cacheNames) {
+        this.cacheNames = cacheNames;
+    }
+
+    public boolean isCacheNullValues() {
+        return cacheNullValues;
+    }
+
+    public void setCacheNullValues(boolean cacheNullValues) {
+        this.cacheNullValues = cacheNullValues;
+    }
+
+    public boolean isDynamic() {
+        return dynamic;
+    }
+
+    public void setDynamic(boolean dynamic) {
+        this.dynamic = dynamic;
+    }
+
+    public String getCachePrefix() {
+        return cachePrefix;
+    }
+
+    public void setCachePrefix(String cachePrefix) {
+        this.cachePrefix = cachePrefix;
+    }
+
+    public Redis getRedis() {
+        return redis;
+    }
+
+    public void setRedis(Redis redis) {
+        this.redis = redis;
+    }
+
+    public Caffeine getCaffeine() {
+        return caffeine;
+    }
+
+    public void setCaffeine(Caffeine caffeine) {
+        this.caffeine = caffeine;
+    }
+
     public class Redis {
         /**
          * 全局过期时间，单位毫秒，默认不过期
@@ -107,7 +155,6 @@ public class CacheRedisCaffeineProperties {
          * 由于权重需要缓存对象来提供，对于使用spring cache这种场景不是很适合，所以暂不支持配置
          */
 //        private long maximumWeight;
-
         public long getExpireAfterAccess() {
             return expireAfterAccess;
         }
@@ -147,53 +194,5 @@ public class CacheRedisCaffeineProperties {
         public void setMaximumSize(long maximumSize) {
             this.maximumSize = maximumSize;
         }
-    }
-
-    public Set<String> getCacheNames() {
-        return cacheNames;
-    }
-
-    public void setCacheNames(Set<String> cacheNames) {
-        this.cacheNames = cacheNames;
-    }
-
-    public boolean isCacheNullValues() {
-        return cacheNullValues;
-    }
-
-    public void setCacheNullValues(boolean cacheNullValues) {
-        this.cacheNullValues = cacheNullValues;
-    }
-
-    public boolean isDynamic() {
-        return dynamic;
-    }
-
-    public void setDynamic(boolean dynamic) {
-        this.dynamic = dynamic;
-    }
-
-    public String getCachePrefix() {
-        return cachePrefix;
-    }
-
-    public void setCachePrefix(String cachePrefix) {
-        this.cachePrefix = cachePrefix;
-    }
-
-    public Redis getRedis() {
-        return redis;
-    }
-
-    public void setRedis(Redis redis) {
-        this.redis = redis;
-    }
-
-    public Caffeine getCaffeine() {
-        return caffeine;
-    }
-
-    public void setCaffeine(Caffeine caffeine) {
-        this.caffeine = caffeine;
     }
 }

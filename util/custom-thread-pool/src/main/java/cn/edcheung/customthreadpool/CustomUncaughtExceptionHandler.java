@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Description CustomUncaughtExceptionHandler
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/11/17
  * @since JDK 1.8
  */

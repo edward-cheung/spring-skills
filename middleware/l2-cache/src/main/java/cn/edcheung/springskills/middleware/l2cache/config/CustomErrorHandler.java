@@ -15,7 +15,7 @@ import org.springframework.cache.interceptor.CacheErrorHandler;
  * 为了解决该问题，需要继续扩展CacheErrorHandler的handleCachePutError和handleCacheEvictError方法，
  * 思路就是将redis写操作失败的key保存下来，通过重试任务删除这些key对应的redis缓存解决mysql数据与redis缓存数据不一致的问题。
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/11/24
  * @since JDK 1.8
  */

@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * Description CustomAsyncUncaughtExceptionHandler
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/12/8
  * @since JDK 1.8
  */

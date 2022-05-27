@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * <p>
  * 二级缓存：本地缓存 + 分布式缓存
  *
- * @author zhangyi
+ * @author Edward Cheung
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

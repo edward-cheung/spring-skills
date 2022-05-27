@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Description CustomCacheResolver
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/11/27
  * @since JDK 1.8
  */
