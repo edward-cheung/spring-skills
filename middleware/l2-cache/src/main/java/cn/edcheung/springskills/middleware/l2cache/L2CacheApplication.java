@@ -1,8 +1,8 @@
 package cn.edcheung.springskills.middleware.l2cache;
 
-import cn.edcheung.springskills.middleware.l2cache.annotation.L2Cacheable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.Cacheable;
 
 @SpringBootApplication
 public class L2CacheApplication {
@@ -11,9 +11,9 @@ public class L2CacheApplication {
         SpringApplication.run(L2CacheApplication.class, args);
     }
 
-    @L2Cacheable()
-    public String getTest(String id) {
-        return id + 123;
+    @Cacheable(key = "'cache_test_' + #test", value = "testCache", cacheManager = "cacheManager")
+    public String getTest(String test) {
+        return test + 123;
     }
 
 }

@@ -10,7 +10,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 /**
  * Description 计划任务配置
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/12/8
  * @since JDK 1.8
  */

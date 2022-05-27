@@ -31,7 +31,7 @@ import java.net.NetworkInterface;
  * 在类加载时，校验本地时间与redis中记录的worker时间戳，只有本地时间大于redis时间，才能继续加载
  * 否则服务启动失败，需要等待一会再重启
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/10/29
  * @since JDK 1.8
  */

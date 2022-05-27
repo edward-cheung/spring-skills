@@ -67,7 +67,7 @@ public class RequestLogAspect {
      * 拦截异常操作
      *
      * @param joinPoint 连接点
-     * @param e 异常
+     * @param e         异常
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfter(JoinPoint joinPoint, Exception e) {

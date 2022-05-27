@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * Description 异步线程池配置
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/3/26
  * @since JDK 1.8
  */

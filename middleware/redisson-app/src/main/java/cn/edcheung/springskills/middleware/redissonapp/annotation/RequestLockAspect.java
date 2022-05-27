@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Description RequestLockAspect
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/4/27
  * @since JDK 1.8
  */

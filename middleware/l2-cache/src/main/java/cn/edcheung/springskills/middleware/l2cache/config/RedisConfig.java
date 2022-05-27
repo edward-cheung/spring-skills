@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Description RedisConfig
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/10/22
  * @since JDK 1.8
  */

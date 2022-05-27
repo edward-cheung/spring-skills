@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Description HttpConnectionPoolUtil
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/12/8
  * @since JDK 1.8
  */

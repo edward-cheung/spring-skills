@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Description CustomCacheResolver
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/11/27
  * @since JDK 1.8
  */
@@ -27,24 +27,16 @@ public class CustomCacheResolver implements CacheResolver {
         this.cacheManagerList = cacheManagerList;
     }
 
-    public List<CacheManager> getCacheManagerList() {
-        return cacheManagerList;
-    }
-
-    public void setCacheManagerList(List<CacheManager> cacheManagerList) {
-        this.cacheManagerList = cacheManagerList;
-    }
-
     @Override
     public Collection<? extends Cache> resolveCaches(CacheOperationInvocationContext<?> context) {
         Collection<String> cacheNames = getCacheNames(context);
         Collection<Cache> result = new ArrayList<>(2);
-        for (CacheManager cacheManager : getCacheManagerList()) {
+        for (CacheManager cacheManager : cacheManagerList) {
             for (String cacheName : cacheNames) {
                 Cache cache = cacheManager.getCache(cacheName);
                 if (cache == null) {
-                    throw new IllegalArgumentException("Cannot find cache named '" + cacheName
-                            + "' for " + context.getOperation());
+                    throw new IllegalArgumentException("Cannot find cache named '" + cacheName +
+                            "' for " + context.getOperation());
                 }
                 result.add(cache);
             }

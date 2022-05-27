@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Description HttpClientUtil
  *
- * @author zhangyi
+ * @author Edward Cheung
  * @date 2020/12/8
  * @since JDK 1.8
  */
