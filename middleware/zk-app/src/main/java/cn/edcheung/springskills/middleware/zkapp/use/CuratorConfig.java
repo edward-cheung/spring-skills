@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.middleware.zookeeperapp.use;
+package cn.edcheung.springskills.middleware.zkapp.use;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

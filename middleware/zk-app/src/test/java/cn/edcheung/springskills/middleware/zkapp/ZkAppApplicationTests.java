@@ -1,13 +1,13 @@
-package cn.edcheung.springskills.middleware.zookeeperapp;
+package cn.edcheung.springskills.middleware.zkapp;
 
-import cn.edcheung.springskills.middleware.zookeeperapp.lock.ZookeeperClient;
+import cn.edcheung.springskills.middleware.zkapp.lock.ZookeeperClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 //@RunWith(SpringRunner.class)
 @SpringBootTest
-class ZookeeperAppApplicationTests {
+class ZkAppApplicationTests {
 
     @Autowired
     private ZookeeperClient zookeeperClient;

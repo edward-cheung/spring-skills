@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.middleware.zookeeperapp.use;
+package cn.edcheung.springskills.middleware.zkapp.use;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.Watcher;

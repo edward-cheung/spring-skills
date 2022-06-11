@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.middleware.zookeeperapp.lock;
+package cn.edcheung.springskills.middleware.zkapp.lock;
 
 import java.util.concurrent.TimeUnit;
 

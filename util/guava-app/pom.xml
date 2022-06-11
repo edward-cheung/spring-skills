@@ -14,9 +14,7 @@
     <packaging>jar</packaging>
     <name>guava-app</name>
     <description>Skills project for projects</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>

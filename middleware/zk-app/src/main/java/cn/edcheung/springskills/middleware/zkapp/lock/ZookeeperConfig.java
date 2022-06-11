@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.middleware.zookeeperapp.lock;
+package cn.edcheung.springskills.middleware.zkapp.lock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

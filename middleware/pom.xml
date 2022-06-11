@@ -14,14 +14,12 @@
     <packaging>pom</packaging>
     <name>middleware</name>
     <description>Skills for Spring projects</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
 
     <modules>
         <module>l2-cache</module>
         <module>redisson-app</module>
-        <module>zookeeper-app</module>
+        <module>zk-app</module>
         <module>es-app</module>
     </modules>
 </project>

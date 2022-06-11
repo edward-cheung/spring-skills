@@ -1,6 +1,6 @@
-package cn.edcheung.springskills.middleware.zookeeperapp;
+package cn.edcheung.springskills.middleware.zkapp;
 
-import cn.edcheung.springskills.middleware.zookeeperapp.lock.AbstractZookeeperLock;
+import cn.edcheung.springskills.middleware.zkapp.lock.AbstractZookeeperLock;
 
 /**
  * Description TestLock
