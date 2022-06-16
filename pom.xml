@@ -21,6 +21,8 @@
         <module>util</module>
         <module>gateway</module>
         <module>middleware</module>
+        <module>cloud</module>
+        <module>cloud-ali</module>
     </modules>
 
     <properties>
