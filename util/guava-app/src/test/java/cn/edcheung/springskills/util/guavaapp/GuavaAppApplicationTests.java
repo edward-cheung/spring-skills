@@ -168,12 +168,13 @@ class GuavaAppApplicationTests {
         // 在没有请求使用令牌桶的时候，令牌会先创建好放在桶中，所以此时如果突然有突发流量进来，由于桶中有足够的令牌可以快速响应。
         // RateLimiter 在没有足够令牌发放时采用滞后处理的方式，前一个请求获取令牌所需等待的时间由下一次请求来承受。
         RateLimiter rateLimiter1 = RateLimiter.create(5);
+        rateLimiter1.setRate(5d);
 
         // 2. 平滑预热限流(SmoothWarmingUp)
         // 平滑预热限流并不会像平滑突发限流一样先将所有的令牌创建好，它启动后会有一段预热期，逐步将分发频率提升到配置的速率。
-        // 比如下面例子创建一个平均分发令牌速率为 2，预热期为 3 分钟。由于设置了预热时间是 3 秒，令牌桶一开始并不会 0.5 秒发一个令牌，
+        // 比如下面例子创建一个平均分发令牌速率为 2，预热期为 3 秒钟。由于设置了预热时间是 3 秒，令牌桶一开始并不会 0.5 秒发一个令牌，
         // 而是形成一个平滑线性下降的坡度，频率越来越高，在 3 秒钟之内达到原本设置的频率，以后就以固定的频率输出。
-        RateLimiter rateLimiter2 = RateLimiter.create(10, 60, TimeUnit.SECONDS);
+        RateLimiter rateLimiter2 = RateLimiter.create(2, 3, TimeUnit.SECONDS);
 
         rateLimiter1.acquire();
         rateLimiter1.acquire(3);

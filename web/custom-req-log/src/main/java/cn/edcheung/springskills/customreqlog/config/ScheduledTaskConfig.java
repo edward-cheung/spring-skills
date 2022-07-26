@@ -7,6 +7,8 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
+import java.util.concurrent.Executors;
+
 /**
  * Description 计划任务配置
  *
@@ -31,5 +33,6 @@ public class ScheduledTaskConfig implements SchedulingConfigurer {
         scheduler.setErrorHandler(throwable -> System.out.println(throwable.getMessage()));
         scheduler.initialize();
         scheduledTaskRegistrar.setTaskScheduler(scheduler);
+        // scheduledTaskRegistrar.setScheduler(Executors.newScheduledThreadPool(10));
     }
 }
