@@ -6,7 +6,7 @@
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <!-- <plugin>元素用来定义一个插件。插件用于扩展或修改通过MyBatis Generator (MBG)代码生成器生成的代码。 -->
-        <plugin type="cn.edcheung.springskills.codegenerator02.BasePlugin">
+        <plugin type="cn.edcheung.springskills.db.codegenerator02.BasePlugin">
             <property name="controller" value="cn.edcheung.springskills.codegenerator02.controller.sysRole"/>
             <property name="service" value="cn.edcheung.springskills.codegenerator02.service.sysRole"/>
             <property name="vo" value="cn.edcheung.springskills.codegenerator02.domain.sysRole.vo"/>
