@@ -6,7 +6,7 @@
         <groupId>cn.edcehung</groupId>
         <artifactId>gateway</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
     <artifactId>rest-template</artifactId>

@@ -6,15 +6,14 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>spring-skills</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>cn.edchueng</groupId>
+    <groupId>cn.edcheung</groupId>
     <artifactId>cloud-ali</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>cloud-ali</name>
     <description>Skills for Spring projects</description>
-
 
     <modules>
         <module>app-consumer</module>

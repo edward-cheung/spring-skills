@@ -6,7 +6,7 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>spring-skills</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
     <artifactId>web</artifactId>
@@ -15,9 +15,9 @@
     <name>web</name>
     <description>Skills for Spring projects</description>
 
-
     <modules>
         <module>validation</module>
         <module>custom-req-log</module>
     </modules>
+
 </project>

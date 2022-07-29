@@ -6,11 +6,12 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>web</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
     <artifactId>custom-req-log</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>custom-req-log</name>
     <description>Skills for Spring projects</description>
 

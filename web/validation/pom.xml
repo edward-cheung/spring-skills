@@ -6,7 +6,7 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>web</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
     <artifactId>validation</artifactId>
@@ -49,110 +49,72 @@
         </dependency>-->
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <!--传递给脚本的参数值-->
-                <activeProfile>test</activeProfile>
-                <!--<package-name>${scripts_packageName}</package-name>
-                <boot-main>${scripts_bootMain}</boot-main>-->
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <activeProfile>prod</activeProfile>
-                <!--<package-name>${scripts_packageName}</package-name>
-                <boot-main>${scripts_bootMain}</boot-main>-->
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
-
     <build>
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/profiles/${activeProfile}</directory>
-            </resource>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
+                    <include>mapper/**/*.xml</include>
                     <include>static/**</include>
                     <include>templates/**</include>
+                    <include>generator/**</include>
+                    <include>*.properties</include>
+                    <!-- 程序找到yml属性文件中的值，要看resource路径下是否包含yml文件 -->
+                    <include>*.yml</include>
+                    <include>*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
                 </includes>
             </resource>
         </resources>
-
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 项目启动类 -->
+                            <mainClass>cn.edcheung.springskills.web.validation.ValidationApplication</mainClass>
+                            <!-- 依赖的jar的目录前缀 -->
+                            <classpathPrefix>../lib</classpathPrefix>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                    <!-- 项目启动jar包排除目录 -->
+                    <excludes>
+                        <exclude>bin/**</exclude>
+                        <exclude>config/**</exclude>
+                        <exclude>logs/**</exclude>
+                        <exclude>logback.xml</exclude>
+                        <exclude>application.properties</exclude>
+                        <exclude>application.yml</exclude>
+                        <exclude>bootstrap.properties</exclude>
+                        <exclude>bootstrap.yml</exclude>
+                        <exclude>config.properties</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.4.RELEASE</version>
                 <configuration>
                     <layout>ZIP</layout>
                     <includes>
+                        <!-- 项目启动jar包中排除依赖包 -->
                         <include>
                             <groupId>non-exists</groupId>
                             <artifactId>non-exists</artifactId>
                         </include>
                     </includes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <!--<mainClass>${scripts_bootMain}</mainClass>-->
-                            <mainClass>cn.edcheung.springskills.web.validation.ValidationApplication</mainClass>
-                        </manifest>
-                    </archive>
-                    <!--打包排除项-->
-                    <excludes>
-                        <exclude>**/*.yml</exclude>
-                        <exclude>**/*.properties</exclude>
-                        <exclude>**/*.xml</exclude>
-                        <exclude>**/*.sh</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-a-jar</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -176,7 +138,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
             <!-- 打包时跳过测试 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -187,23 +157,22 @@
             </plugin>
             <!-- 打包插件 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <!-- The configuration of the plugin -->
-                <configuration>
-                    <!--<finalName>${project.artifactId}</finalName>-->
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <!-- Specifies the configuration file of the assembly plugin -->
-                    <descriptors>
-                        <descriptor>${project.basedir}/src/main/assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
                 <executions>
                     <execution>
+                        <configuration>
+                            <finalName>${project.artifactId}</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <!-- 描述文件路径 -->
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
                         <id>make-assembly</id>
+                        <!-- 绑定到package生命周期阶段上 -->
                         <phase>package</phase>
                         <goals>
+                            <!-- 只运行一次 -->
                             <goal>single</goal>
                         </goals>
                     </execution>
@@ -211,4 +180,25 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <properties>
+                <activeProfile>test</activeProfile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activeProfile>prod</activeProfile>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </project>

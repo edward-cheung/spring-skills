@@ -6,9 +6,9 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>spring-skills</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>cn.edchueng</groupId>
+    <groupId>cn.edcheung</groupId>
     <artifactId>cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>

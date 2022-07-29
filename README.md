@@ -32,7 +32,7 @@
 - cloud SpringCloud
     - eureka-server 注册中心服务端
     - config-server 配置中心服务端
-    - spring-gateway 网关
+    - spring-gateway 网关，整合Spring Security认证并鉴权
     - service-consumer 服务消费者
     - service-provider 服务提供者
 

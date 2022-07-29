@@ -6,7 +6,7 @@
         <groupId>cn.edcheung</groupId>
         <artifactId>spring-skills</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
     <artifactId>middleware</artifactId>
@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
     <name>middleware</name>
     <description>Skills for Spring projects</description>
-
 
     <modules>
         <module>l2-cache</module>
