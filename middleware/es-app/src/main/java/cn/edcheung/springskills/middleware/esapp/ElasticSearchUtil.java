@@ -97,7 +97,12 @@ public class ElasticSearchUtil {
                     logger.error("", e);
                 }
             }
-            RestClientBuilder builder = RestClient.builder(httpHostArr);
+            RestClientBuilder builder = RestClient.builder(httpHostArr)
+                    //.setDefaultHeaders()
+                    //.setFailureListener()
+                    //.setNodeSelector()
+                    //.setHttpClientConfigCallback()
+                    .setCompressionEnabled(true);
             restHighLevelClient = new RestHighLevelClient(builder);
         } catch (IOException e) {
             logger.error("", e);
@@ -274,6 +279,7 @@ public class ElasticSearchUtil {
         if (StringUtils.isNotEmpty(fields)) {
             //只查询特定字段。如果需要查询所有字段则不设置该项。
             request.fetchSourceContext(new FetchSourceContext(true, fields.split(","), Strings.EMPTY_ARRAY));
+
         }
         GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);
         return response.getSource();
@@ -317,7 +323,6 @@ public class ElasticSearchUtil {
         }
         return null != response && response.hasFailures();
     }
-
 
     /**
      * 获取低水平客户端

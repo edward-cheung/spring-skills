@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.common.Strings;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -153,6 +154,10 @@ public class ElasticSearchController {
         //query.sort("age", SortOrder.DESC);
         query.sort("name" + ".keyword", SortOrder.ASC);
 
+        // 取消1w条限制
+        //query.trackTotalHits(true);
+        // 设置超时时间为20s
+        //query.timeout(new TimeValue(20000));
         return elasticSearchUtil.searchListData(index, query, highlightField);
     }
 }

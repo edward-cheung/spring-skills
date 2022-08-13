@@ -5,9 +5,15 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -36,20 +42,66 @@ class EsAppApplicationTests {
     }
 
     /**
+     * 测试创建索引
+     */
+    @Test
+    public void testCreateIndex() throws IOException {
+        // 设置索引  类型
+        String index = "users";
+        String type = "man";
+        //设置索引的信息:分片 备份
+        Settings.Builder settings = Settings.builder()
+                .put("number_of_shards", 3)
+                .put("number_of_replicas", 1);
+        //构建mapping
+        XContentBuilder mapping = JsonXContent.contentBuilder()
+                .startObject().startObject("properties")
+                //.startObject("_all").field("enabled", false).endObject()
+                //.startObject("_source").field("enabled", false).endObject()
+                .startObject("create_time")
+                .field("format", "yyyy/MM/dd||yyyy/MM/dd HH:mm:ss")
+                .field("index", "not_analyzed")
+                .endObject()
+                //.startObject("userId").field("type", "long").endObject()
+                //.startObject("phone").field("type", "keyword").endObject()
+                //.startObject("money").field("type", "double").endObject()
+                .startObject("userName").field("type", "text").endObject()
+                .startObject("age").field("type", "integer").endObject()
+                .endObject().endObject();
+        // 创建索引请求
+        CreateIndexRequest request = new CreateIndexRequest(index)
+                .settings(settings)
+                .mapping(type, mapping.contentType());
+        // 执行客户端请求
+        CreateIndexResponse response = client.indices()
+                .create(request, RequestOptions.DEFAULT);
+        // 获取响应数据
+        System.out.println(response);
+    }
+
+    /**
      * 测试存储
      */
     @Test
     public void testIndexData() throws IOException {
         IndexRequest indexRequest = new IndexRequest("users");
         indexRequest.id("1");
-//        indexRequest.source("userName", "zhangsan", "age", "18");
+        // indexRequest.source("userName", "zhangsan", "age", "18");
         User user = new User();
         user.setAge(18);
         user.setUserName("lisi");
         user.setGender("男");
         String jsonString = JSONObject.toJSONString(user);
-//        必须指定XContentType
+        // 必须指定XContentType
         indexRequest.source(jsonString, XContentType.JSON);
+        // 指定路由
+        // 所有的文档API请求(get,index,delete,bulk,update)都接受routing路由参数,通过这个参数可以自定义文档到数据分片的映射规则
+        // indexRequest.routing("id");
+        // 设置数据更改后的刷新策略
+        // NONE：这是默认的一种方式，调用request修改以后，并不进行强制刷新，刷新的时间间隔为refresh_interval设置的参数。
+        // IMMEDIATE：强制刷新相关的主分片和副分片（而不是整个索引），使更新的分片状态变为可搜索。这种方式并不适用于索引和查询高吞吐量的场景，但是作为流量小时提供一致性的视图的确是很使用的。
+        // WAIT_UNTIL：在返回请求结果之前，会等待刷新请求所做的更改。
+        indexRequest.setRefreshPolicy(WriteRequest.RefreshPolicy.NONE);
         // 执行
         IndexResponse response = client.index(indexRequest, RequestOptions.DEFAULT);
         // 获取响应数据

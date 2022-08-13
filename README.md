@@ -7,7 +7,7 @@
 
 - web 接入层
     - validation 单参数以及对象参数校验、分组校验、嵌套校验、自定义校验和全局异常处理
-    - custom-req-log 自定义请求日志，另外包括异步执行、计划任务
+    - custom-req-log 自定义请求日志，另外包括异步执行和计划任务
 
 - gateway 网关
     - rest-template http请求转发网关
