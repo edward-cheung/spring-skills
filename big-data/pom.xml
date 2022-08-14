@@ -9,17 +9,13 @@
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edcheung</groupId>
-    <artifactId>middleware</artifactId>
+    <artifactId>big-data</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>middleware</name>
+    <name>big-data</name>
     <description>Skills for Spring projects</description>
 
     <modules>
-        <module>l2-cache</module>
-        <module>redisson-app</module>
-        <module>zk-app</module>
-        <module>es-app</module>
-        <module>kafka-app</module>
+        <module>hbase-app</module>
     </modules>
 </project>

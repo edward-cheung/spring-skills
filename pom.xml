@@ -18,11 +18,13 @@
     <modules>
         <module>db</module>
         <module>web</module>
-        <module>util</module>
         <module>gateway</module>
+        <module>io</module>
+        <module>util</module>
         <module>middleware</module>
         <module>cloud</module>
         <module>cloud-ali</module>
+        <module>big-data</module>
     </modules>
 
     <properties>

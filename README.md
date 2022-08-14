@@ -13,29 +13,33 @@
     - rest-template http请求转发网关
     - netty-forward Netty转发网关
 
+- io 网络IO
+    - netty-app Netty应用
+
 - util 工具
     - mail 邮件发送
     - id-worker 唯一id生成器
-    - http-conn-pool http连接池
     - custom-thread-pool 自定义线程池
+    - http-conn-pool http连接池
     - guava-app Guava应用
 
 - middleware 中间件
     - l2-cache 整合Spring Cache并实现二级缓存
     - redisson-app Redisson应用
     - zk-app Zookeeper应用
-    - kafka-app Kafka应用
     - es-app Elasticsearch应用
-    - hbase-app HBase应用
-    - netty-app Netty应用
+    - kafka-app Kafka应用
 
 - cloud SpringCloud
     - eureka-server 注册中心服务端
     - config-server 配置中心服务端
     - spring-gateway 网关，整合Spring Security认证并鉴权
-    - service-consumer 服务消费者
     - service-provider 服务提供者
+    - service-consumer 服务消费者
 
 - cloud-ali SpringCloudAlibaba 包括Nacos、Dubbo、RocketMQ、Seata等应用
-    - app-consumer 服务应用消费者
     - app-provider 服务应用提供者
+    - app-consumer 服务应用消费者
+
+- big-data 大数据
+    - hbase-app HBase应用

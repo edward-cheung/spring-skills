@@ -18,8 +18,8 @@
     <modules>
         <module>mail</module>
         <module>id-worker</module>
-        <module>http-conn-pool</module>
         <module>custom-thread-pool</module>
+        <module>http-conn-pool</module>
         <module>guava-app</module>
     </modules>
 

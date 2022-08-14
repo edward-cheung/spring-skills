@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: kafka-springboot
+  # kafka\u914D\u7F6E\u4FE1\u606F
+  kafka:
+    bootstrap-servers: 192.168.xxx.xxx:9092 # \u96C6\u7FA4\u7528\u9017\u53F7\u5206\u9694
+    producer: # \u751F\u4EA7\u8005
+      retries: 3 # \u5931\u8D25\u91CD\u8BD5\u6B21\u6570
+      batch-size: 16384
+      buffer-memory: 33554432
+      acks: 1
+      # \u6307\u5B9A\u6D88\u606Fkey\u548C\u6D88\u606F\u4F53\u7684\u7F16\u89E3\u7801\u65B9\u5F0F
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer: # \u6D88\u8D39\u8005
+      group-id: default-group # \u6D88\u8D39\u7EC4
+      enable-auto-commit: false
+      # auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: MANUAL_IMMEDIATE

@@ -22,8 +22,8 @@
         <module>eureka-server</module>
         <module>config-server</module>
         <module>spring-gateway</module>
-        <module>service-consumer</module>
         <module>service-provider</module>
+        <module>service-consumer</module>
     </modules>
 
     <dependencyManagement>

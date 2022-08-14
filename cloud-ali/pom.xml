@@ -16,8 +16,8 @@
     <description>Skills for Spring projects</description>
 
     <modules>
-        <module>app-consumer</module>
         <module>app-provider</module>
+        <module>app-consumer</module>
     </modules>
 
 </project>
