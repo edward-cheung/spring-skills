@@ -73,8 +73,9 @@ class EsAppApplicationTests {
                 .settings(settings)
                 .mapping(type, mapping.contentType());
         // 执行客户端请求
-        CreateIndexResponse response = client.indices()
-                .create(request, RequestOptions.DEFAULT);
+        CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
+        boolean acknowledged = response.isAcknowledged();//指示是否所有节点都已确认请求
+        boolean shardsAcknowledged = response.isShardsAcknowledged();//指示是否在超时之前为索引中的每个分片启动了必需的分片副本数
         // 获取响应数据
         System.out.println(response);
     }
@@ -124,8 +125,6 @@ class EsAppApplicationTests {
         searchSourceBuilder.aggregation(AggregationBuilders.terms("aggAge").field("age").size(10));
         // 计算平均薪资
         searchSourceBuilder.aggregation(AggregationBuilders.avg("balanceAvg").field("balance"));
-
-
         System.out.println("检索条件" + searchSourceBuilder.toString());
         searchRequest.source(searchSourceBuilder);
 
@@ -152,7 +151,6 @@ class EsAppApplicationTests {
         // 计算平均薪资
         searchSourceBuilder.aggregation(AggregationBuilders.avg("balanceAvg").field("balance"));
 
-
         System.out.println("检索条件" + searchSourceBuilder.toString());
         searchRequest.source(searchSourceBuilder);
 
@@ -178,7 +176,6 @@ class EsAppApplicationTests {
         Avg avg = aggregations.get("balanceAvg");
         System.out.println("平均薪资为" + avg.getValue());
     }
-
 
     static class User {
         private String userName;
