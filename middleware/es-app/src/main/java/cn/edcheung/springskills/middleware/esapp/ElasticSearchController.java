@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.common.Strings;
-import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -124,41 +123,62 @@ public class ElasticSearchController {
     @ApiOperation("分页查询")
     @GetMapping("data/page")
     public List<Map<String, Object>> selectPage(String index) throws IOException {
-        //构建查询条件
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 1.matchAllQuery 查所有
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.matchAllQuery());
+        // 2.termQuery 根据字段不分词查询
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.termQuery("username","张"));
+        // 3.termsQuery 根据多个字段不分词查询
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.termsQuery("username","1","老李"));
+        // 4.matchQuery 根据字段分词查询
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.matchQuery("username","张"));
+        // 5.multiQuery 多字段分词查询
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.multiMatchQuery("南窑头汉堡臭豆腐","name","address").field("name",10));
+        // 6.RangeQuery 范围查询+排序
+        //searchSourceBuilder.searchSourceBuilder(QueryBuilders.rangeQuery("price").gte(10).lte(50));
+        //searchSourceBuilder.sort("price", SortOrder.DESC);
+        // 7.boolQuery组合查询
+        //TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", "臭豆腐");
+        //RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("price").gte(10).lte(50);
+        //BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        //boolQueryBuilder.must(termQueryBuilder);
+        //boolQueryBuilder.must(rangeQueryBuilder);
+        //searchSourceBuilder.searchSourceBuilder(boolQueryBuilder);
+
+        // 构建查询条件
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-        //精确查询
+        // 精确查询
         //boolQueryBuilder.must(QueryBuilders.wildcardQuery("name", "张三"));
         // 模糊查询
         boolQueryBuilder.filter(QueryBuilders.wildcardQuery("name", "张"));
         // 范围查询 from:相当于闭区间; gt:相当于开区间(>) gte:相当于闭区间 (>=) lt:开区间(<) lte:闭区间 (<=)
         boolQueryBuilder.filter(QueryBuilders.rangeQuery("age").from(18).to(32));
-        SearchSourceBuilder query = new SearchSourceBuilder();
-        query.query(boolQueryBuilder);
-        //需要查询的字段，缺省则查询全部
+        searchSourceBuilder.query(boolQueryBuilder);
+        // 需要查询的字段，缺省则查询全部
         String fields = "";
-        //需要高亮显示的字段
+        // 需要高亮显示的字段
         String highlightField = "name";
         if (StringUtils.isNotBlank(fields)) {
-            //只查询特定字段。如果需要查询所有字段则不设置该项。
-            query.fetchSource(new FetchSourceContext(true, fields.split(","), Strings.EMPTY_ARRAY));
+            // 只查询特定字段。如果需要查询所有字段则不设置该项。
+            searchSourceBuilder.fetchSource(new FetchSourceContext(true, fields.split(","), Strings.EMPTY_ARRAY));
         }
-        //分页参数，相当于pageNum
+        // 分页参数，相当于pageNum
         int from = 0;
-        //分页参数，相当于pageSize
+        // 分页参数，相当于pageSize
         int size = 2;
         //设置分页参数
-        query.from(from);
-        query.size(size);
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
 
-        //设置排序字段和排序方式，注意：字段是text类型需要拼接.keyword
-        //query.sort("age", SortOrder.DESC);
-        query.sort("name" + ".keyword", SortOrder.ASC);
+        // 设置排序字段和排序方式，注意：字段是text类型需要拼接.keyword
+        //searchSourceBuilder.sort("age", SortOrder.DESC);
+        searchSourceBuilder.sort("name" + ".keyword", SortOrder.ASC);
 
         // 取消1w条限制
-        //query.trackTotalHits(true);
+        //searchSourceBuilder.trackTotalHits(true);
         // 设置超时时间为20s
-        //query.timeout(new TimeValue(20000));
-        return elasticSearchUtil.searchListData(index, query, highlightField);
+        //searchSourceBuilder.timeout(new TimeValue(20000));
+        return elasticSearchUtil.searchListData(index, searchSourceBuilder, highlightField);
     }
 }
 
