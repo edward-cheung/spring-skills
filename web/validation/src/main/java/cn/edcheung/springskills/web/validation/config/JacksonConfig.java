@@ -33,26 +33,27 @@ public class JacksonConfig {
     @ConditionalOnMissingBean(ObjectMapper.class)
     public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-        // 通过该方法对mapper对象进行设置，所有序列化的对象都将按改规则进行系列化
+        // 通过该方法对ObjectMapper对象进行设置，所有序列化的对象都将按改规则进行序列化
         // Include.Include.ALWAYS 默认
         // Include.NON_DEFAULT 属性为默认值不序列化
         // Include.NON_EMPTY 属性为 空（""） 或者为 NULL 都不序列化，则返回的json是没有这个字段的。这样对移动端会更省流量
         // Include.NON_NULL 属性为NULL 不序列化
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        // 反序列化时,遇到未知属性(那些没有对应的属性来映射的属性,并且没有任何setter或handler来处理这样的属性)时是否引起结果失败(通过抛JsonMappingException异常)
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        // 允许出现单引号
+        // 将空字符串""转为null
         SimpleModule module = new SimpleModule();
         module.addDeserializer(String.class, new StdScalarDeserializer<String>(String.class) {
 
-                    private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-                    @Override
-                    public String deserialize(JsonParser p, DeserializationContext ctxt)
-                            throws IOException, JsonProcessingException {
-                        String value = p.getValueAsString();
-                        return StringUtils.isEmpty(value) ? null : value.trim();
-                    }
-                });
+            @Override
+            public String deserialize(JsonParser p, DeserializationContext ctxt)
+                    throws IOException, JsonProcessingException {
+                String value = p.getValueAsString();
+                return StringUtils.hasLength(value) ? null : value;
+            }
+        });
         objectMapper.registerModule(module);
         return objectMapper;
     }
@@ -72,7 +73,7 @@ public class JacksonConfig {
                             public String deserialize(JsonParser jsonParser, DeserializationContext ctx)
                                     throws IOException {
                                 String value = jsonParser.getValueAsString();
-                                return StringUtils.isEmpty(value) ? null : StringUtils.trimWhitespace(value);
+                                return StringUtils.hasLength(value) ? null : value;
                             }
                         });
             }
