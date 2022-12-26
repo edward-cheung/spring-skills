@@ -18,8 +18,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , name, code, img, url, pid, level, orders, status, cloud_code, is_delete, gmt_create,
-    gmt_modified
+        , name, code, img, url, pid, level, orders, status, cloud_code, is_delete, gmt_create, gmt_modified
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select

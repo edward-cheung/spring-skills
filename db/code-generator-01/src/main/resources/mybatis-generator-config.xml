@@ -15,11 +15,11 @@
         <!-- 为生成的Java模型创建一个toString方法 -->
         <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
         <!-- 使用自定义的插件 -->
-        <plugin type="cn.edcheung.springbootdemo.LombokPlugin"/>
+        <plugin type="cn.edcheung.springskills.db.codegenerator01.LombokPlugin"/>
         <!-- 生成mapper.xml时覆盖原文件 -->
         <!--<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />-->
         <!-- 自定义的注释规则，继承 DefaultCommentGenerator 重写方法 -->
-        <commentGenerator type="cn.edcheung.springbootdemo.CommentGenerator">
+        <commentGenerator type="cn.edcheung.springskills.db.codegenerator01.CommentGenerator">
             <!-- 是否去除所有自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
             <!-- 是否去除自动生成日期的注释 true：是 ： false:否 -->

@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50728
  Source Host           : 127.0.0.1:3306
- Source Schema         : springbootdemo
+ Source Schema         : springskills
 
  Target Server Type    : MySQL
  Target Server Version : 50728

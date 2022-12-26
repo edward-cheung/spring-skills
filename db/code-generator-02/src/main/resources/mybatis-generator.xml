@@ -22,7 +22,7 @@
         <!--数据库链接地址账号密码-->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://127.0.0.1:3306/springbootdemo"
+                connectionURL="jdbc:mysql://127.0.0.1:3306/springskills"
                 userId="root"
                 password="root"
         />
