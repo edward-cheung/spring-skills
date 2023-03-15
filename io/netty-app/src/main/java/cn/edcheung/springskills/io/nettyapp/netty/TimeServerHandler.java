@@ -8,6 +8,20 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+/**
+ * handler的生命周期回调接口调用顺序:
+ * handlerAdded -> channelRegistered -> channelActive -> channelRead -> channelReadComplete
+ * -> channelInactive -> channelUnRegistered -> handlerRemoved
+ * <p>
+ * handlerAdded: 新建立的连接会按照初始化策略，把handler添加到该channel的pipeline里面，也就是channel.pipeline.addLast(new LifeCycleInBoundHandler)执行完成后的回调；
+ * channelRegistered: 当该连接分配到具体的worker线程后，该回调会被调用。
+ * channelActive：channel的准备工作已经完成，所有的pipeline添加完成，并分配到具体的线上上，说明该channel准备就绪，可以使用了。
+ * channelRead：客户端向服务端发来数据，每次都会回调此方法，表示有数据可读；
+ * channelReadComplete：服务端每次读完一次完整的数据之后，回调该方法，表示数据读取完毕；
+ * channelInactive：当连接断开时，该回调会被调用，说明这时候底层的TCP连接已经被断开了。
+ * channelUnRegistered: 对应channelRegistered，当连接关闭后，释放绑定的workder线程；
+ * handlerRemoved： 对应handlerAdded，将handler从该channel的pipeline移除后的回调方法。
+ */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override

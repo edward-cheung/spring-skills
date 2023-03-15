@@ -33,7 +33,16 @@ public class TimeServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    // Socket参数，服务端接受连接的队列长度，如果队列已满，客户端连接将被拒绝。默认值，Windows为200，其他为128。
+                    // 服务端处理客户端连接请求是顺序处理的，所以同一时间只能处理一个客户端连接。
+                    // 多个客户端同时来的时候，服务端将不能处理的客户端连接请求放在队列中等待处理。
+                    // syns queue：保存一个SYN已经到达，但三次握手还没有完成的连接。
+                    // accept queue：保存三次握手已完成，内核正等待进程执行accept的调用的连接。
+                    .option(ChannelOption.SO_BACKLOG, 64)
+                    // Socket参数，TCP数据接收缓冲区大小。需要注意的是：当设置值超过64KB时，需要在绑定到本地端口前设置。
+                    // 该值设置的是由ServerSocketChannel使用accept接受的SocketChannel的接收缓冲区。
+                    .option(ChannelOption.SO_RCVBUF, 32 * 1024)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChildChannelHandler());
             // 绑定端口，同步等待成功
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();

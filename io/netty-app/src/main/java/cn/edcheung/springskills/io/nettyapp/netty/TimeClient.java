@@ -29,7 +29,19 @@ public class TimeClient {
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group).channel(NioSocketChannel.class)
+                    // TCP参数，立即发送数据，默认值为Ture（Netty默认为True而操作系统默认为False）。
+                    // 该值设置Nagle算法的启用，改算法将小的碎片数据连接成更大的报文来最小化所发送的报文的数量，
+                    // 如果需要发送一些较小的报文，则需要禁用该算法。Netty默认禁用该算法，从而最小化报文传输延时。
                     .option(ChannelOption.TCP_NODELAY, true)
+                    // Socket参数，连接保活，默认值为False。启用该功能时，TCP会主动探测空闲连接的有效性。
+                    // 可以将此功能视为TCP的心跳机制，需要注意的是：默认的心跳间隔是7200s即2小时。Netty默认关闭该功能。
+                    .option(ChannelOption.SO_KEEPALIVE, false)
+                    // Netty参数，连接超时毫秒数，默认值30000毫秒即30秒。
+                    .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 30000)
+                    // Socket参数，TCP数据发送缓冲区大小。
+                    .option(ChannelOption.SO_SNDBUF, 32 * 1024)
+                    // Socket参数，TCP数据接收缓冲区大小。
+                    .option(ChannelOption.SO_RCVBUF, 32 * 1024)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {

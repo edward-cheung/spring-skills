@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
-    private ByteBuf firstMessage;
+    private final ByteBuf firstMessage;
 
     public TimeClientHandler() {
         byte[] req = "QUERY TIME ORDER".getBytes();
