@@ -61,7 +61,7 @@ public class NettyClient implements InitializingBean, DisposableBean {
                         // StringDecoder netty解码器。将接受到到的对象转换成字符串，然后流向下一个channelHandle
                         ch.pipeline().addLast(new StringDecoder(StandardCharsets.UTF_8));
                         // 添加客户端心跳检测机制
-                        ch.pipeline().addLast(new IdleStateHandler(0, serverProperties.getHeartbeatTime(), 0, TimeUnit.SECONDS));
+                        ch.pipeline().addLast(new IdleStateHandler(0, serverProperties.getHeartbeatTime(), 0, TimeUnit.MILLISECONDS));
                         ch.pipeline().addLast(nettyHandler);
                     }
                 });

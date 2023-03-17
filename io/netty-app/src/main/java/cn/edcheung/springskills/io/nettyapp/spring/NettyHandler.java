@@ -95,7 +95,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         // 如果连接失败则由后台线程自动执行重连
-        ctx.channel().eventLoop().schedule(() -> nettyClient.connectServer(), serverProperties.getReConnectTime(), TimeUnit.SECONDS);
+        ctx.channel().eventLoop().schedule(() -> nettyClient.connectServer(), serverProperties.getReConnectTime(), TimeUnit.MILLISECONDS);
     }
 
     @Override
