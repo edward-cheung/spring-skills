@@ -37,14 +37,14 @@ public class ResultBeanBuilder {
      * 操作失败
      */
     public static <T> ResultBean<T> error() {
-        return buildError(ErrorCode.ERROR11006, ErrorCode.ERROR11006.getMessage());
+        return buildError(ErrorCode.ERROR11001, ErrorCode.ERROR11001.getMessage());
     }
 
     /**
      * 操作失败-消息
      */
     public static <T> ResultBean<T> error(String message) {
-        return buildError(ErrorCode.ERROR11006, message);
+        return buildError(ErrorCode.ERROR11001, message);
     }
 
     /**
@@ -58,14 +58,14 @@ public class ResultBeanBuilder {
      * 参数不正确-请检查参数是否正确
      */
     public static <T> ResultBean<T> argumentError(String message) {
-        return buildError(ErrorCode.ERROR11001, message);
+        return buildError(ErrorCode.ERROR11003, message);
     }
 
     /**
      * 内部错误-网络连接失败，请稍后再试
      */
     public static <T> ResultBean<T> innerError() {
-        return buildError(ErrorCode.ERROR11001, ErrorCode.ERROR10000.getCode());
+        return buildError(ErrorCode.ERROR11003, ErrorCode.ERROR10000.getCode());
     }
 
     public static <T> ResultBean<T> error(ErrorCode errorCode, String message) {

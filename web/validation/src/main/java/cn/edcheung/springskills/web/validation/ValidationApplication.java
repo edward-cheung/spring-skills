@@ -86,11 +86,11 @@ public class ValidationApplication implements ResponseBodyAdvice<Object> {
             // 参数类型不匹配
             // 例如说，接口上设置了 @RequestParam("xx") 参数为 Integer，结果传递 xx 参数类型为 String
             String msg = MessageFormat.format("参数类型错误{0}", ((MethodArgumentTypeMismatchException) e).getName());
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
         } else if (e instanceof MissingServletRequestParameterException) {
             // 缺少参数异常
             String msg = MessageFormat.format("缺少参数{0}", ((MissingServletRequestParameterException) e).getParameterName());
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
         } else if (e instanceof ConstraintViolationException) {
             // 单个参数校验异常
             Set<ConstraintViolation<?>> sets = ((ConstraintViolationException) e).getConstraintViolations();
@@ -103,37 +103,37 @@ public class ValidationApplication implements ResponseBodyAdvice<Object> {
                     sb.append(error.getMessage()).append(";");
                 });
                 String msg = sb.substring(0, sb.length() - 1);
-                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
             }
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003);
         } else if (e instanceof MethodArgumentNotValidException) {
             // post请求的对象参数校验异常
             List<ObjectError> errors = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors();
             String msg = getValidExceptionMsg(errors);
             if (msg != null) {
-                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
             }
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003);
         } else if (e instanceof BindException) {
             // get请求的对象参数校验异常
             List<ObjectError> errors = ((BindException) e).getBindingResult().getAllErrors();
             String msg = getValidExceptionMsg(errors);
             if (msg != null) {
-                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
             }
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
             // 请求方法不支持
             // 例如说，A 接口的方法为 GET 方式，结果请求方法为 POST 方式，导致不匹配
             String msg = MessageFormat.format("不支持的请求{0}", ((HttpRequestMethodNotSupportedException) e).getMethod());
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
         } else if (e instanceof NoHandlerFoundException) {
             // 请求url不存在
             // 注意，它需要设置如下两个配置项：
             // 1. spring.mvc.throw-exception-if-no-handler-found 为 true
             // 2. spring.mvc.static-path-pattern 为 /statics/**
             String msg = MessageFormat.format("不存在的请求{0}", ((NoHandlerFoundException) e).getRequestURL());
-            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11003, msg);
         } else {
             // 未知异常
             return ResultBeanBuilder.error(ErrorCode.ERROR10000);
