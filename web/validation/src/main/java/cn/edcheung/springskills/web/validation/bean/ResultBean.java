@@ -46,15 +46,15 @@ public class ResultBean<T> implements Serializable {
         this.data = data;
     }
 
-    public ResultBean(ErrorCode errorCode) {
-        this.code = errorCode.getCode();
-        this.msg = errorCode.getMessage();
-    }
-
     public ResultBean(String code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    public ResultBean(ErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMessage();
     }
 
     public ResultBean() {

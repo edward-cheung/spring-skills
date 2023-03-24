@@ -14,16 +14,16 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class ResultBeanBuilder {
 
+    public static <T> ResultBean<T> success() {
+        return new ResultBean<>(ErrorCode.SUCCESS);
+    }
+
     public static <T> ResultBean<T> success(T data) {
         return new ResultBean<>(ErrorCode.SUCCESS, data);
     }
 
     public static <T> ResultBean<Map> success(Map data) {
         return new ResultBean<>(ErrorCode.SUCCESS, data);
-    }
-
-    public static <T> ResultBean<T> success() {
-        return new ResultBean<>(ErrorCode.SUCCESS);
     }
 
     public static <T> ResultBean<T> is(Boolean result) {
@@ -54,6 +54,14 @@ public class ResultBeanBuilder {
         return buildError(code, message);
     }
 
+    public static <T> ResultBean<T> error(ErrorCode errorCode, String message) {
+        return buildError(errorCode, message);
+    }
+
+    public static <T> ResultBean<T> error(ErrorCode errorCode) {
+        return buildError(errorCode, errorCode.getMessage());
+    }
+
     /**
      * 参数不正确-请检查参数是否正确
      */
@@ -65,15 +73,7 @@ public class ResultBeanBuilder {
      * 内部错误-网络连接失败，请稍后再试
      */
     public static <T> ResultBean<T> innerError() {
-        return buildError(ErrorCode.ERROR11003, ErrorCode.ERROR10000.getCode());
-    }
-
-    public static <T> ResultBean<T> error(ErrorCode errorCode, String message) {
-        return buildError(errorCode, message);
-    }
-
-    public static <T> ResultBean<T> error(ErrorCode errorCode) {
-        return buildError(errorCode, errorCode.getMessage());
+        return buildError(ErrorCode.ERROR10000, ErrorCode.ERROR10000.getCode());
     }
 
     /**
@@ -83,6 +83,20 @@ public class ResultBeanBuilder {
     public static <T> ResultBean<T> errorData(ErrorCode errorCode, T data) {
         ResultBean<T> resultBean = new ResultBean<>(errorCode);
         resultBean.setData(data);
+        return resultBean;
+    }
+
+    /**
+     * 错误消息
+     */
+    private static <T> ResultBean<T> buildError(String errorCode, String message) {
+        ResultBean<T> resultBean = new ResultBean<>(errorCode, message, null);
+        if (Strings.isEmpty(message)) {
+            resultBean.setMsg(errorCode);
+        } else {
+            resultBean.setMsg(message);
+        }
+        // 不能设置值，data可能是对象
         return resultBean;
     }
 
@@ -100,17 +114,4 @@ public class ResultBeanBuilder {
         return resultBean;
     }
 
-    /**
-     * 错误消息
-     */
-    private static <T> ResultBean<T> buildError(String errorCode, String message) {
-        ResultBean<T> resultBean = new ResultBean<>(errorCode,message, null);
-        if (Strings.isEmpty(message)) {
-            resultBean.setMsg(errorCode);
-        } else {
-            resultBean.setMsg(message);
-        }
-        // 不能设置值，data可能是对象
-        return resultBean;
-    }
 }

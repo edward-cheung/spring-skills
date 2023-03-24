@@ -36,7 +36,7 @@ import java.util.Set;
  * Java异常处理机制，当一个异常被抛出时，JVM会在当前的方法里寻找一个匹配的处理，如果没有找到，这个方法会强制结束并弹出当前栈帧，并且异常会重新抛给上层调用的方法（在调用方法帧）。
  * 如果在所有帧弹出前仍然没有找到合适的异常处理，这个线程将终止。如果这个异常在最后一个非守护线程里抛出，将会导致JVM自己终止，比如这个线程是个main线程。
  */
-@RestControllerAdvice(basePackages = {"cn.edcheung.web.validation.controller", "cn.edcheung.web.validation.service"})
+@RestControllerAdvice(basePackages = {"cn.edcheung.web.validation.controller"})
 @SpringBootApplication(scanBasePackages = "cn.edcheung.*")
 public class ValidationApplication implements ResponseBodyAdvice<Object> {
 

@@ -1,5 +1,6 @@
-package cn.edcheung.springskills.web.validation.bean;
+package cn.edcheung.springskills.web.validation.exceptionHandler;
 
+import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 
 import java.io.Serializable;
 
@@ -61,7 +62,7 @@ public class Result<T> implements Serializable {
      * @return Result
      */
     public static <T> Result<T> success() {
-        return of("00000", "成功", null, true);
+        return of(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getMessage(), null, true);
     }
 
     /**
@@ -72,7 +73,7 @@ public class Result<T> implements Serializable {
      * @return Result
      */
     public static <T> Result<T> success(T data) {
-        return of("00000", "成功", data, true);
+        return of(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getMessage(), data, true);
     }
 
     /**
@@ -83,7 +84,7 @@ public class Result<T> implements Serializable {
      * @return Result
      */
     public static <T> Result<T> fail(String message) {
-        return of("10000", message, null, false);
+        return of(ErrorCode.ERROR11001.getCode(), message, null, false);
     }
 
     /**
