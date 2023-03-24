@@ -165,7 +165,7 @@ public class HBaseService implements InitializingBean, DisposableBean {
             get.addColumn(Bytes.toBytes(cf), Bytes.toBytes(cn));
         }
         Result result = table.get(get);
-        //解析结果
+        // 解析结果
         Cell[] cells = result.rawCells();
         for (Cell cell : cells) {
             String columnFamilyName = Bytes.toString(CellUtil.cloneFamily(cell));

@@ -81,7 +81,7 @@ public class HttpConnectionPoolUtil {
         }
 
         if (httpClient == null) {
-            //多线程下多个线程同时调用getHttpClient容易导致重复创建httpClient对象的问题,所以加上了同步锁
+            // 多线程下多个线程同时调用getHttpClient容易导致重复创建httpClient对象的问题,所以加上了同步锁
             synchronized (SYNC_LOCK) {
                 if (httpClient == null) {
                     httpClient = createHttpClient(hostName, port);

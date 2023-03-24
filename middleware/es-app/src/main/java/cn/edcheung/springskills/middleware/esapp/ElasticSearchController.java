@@ -72,7 +72,6 @@ public class ElasticSearchController {
         return elasticSearchUtil.deleteIndex(index);
     }
 
-
     /**
      * 新增/更新数据
      *

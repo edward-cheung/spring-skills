@@ -46,7 +46,6 @@ public class RequestUtil {
         return uri.substring(start + contextPath.length());
     }
 
-
     public static Map<String, String> parseQueryString(String s) {
         if (s == null) {
             return Collections.emptyMap();
@@ -118,7 +117,6 @@ public class RequestUtil {
         }
         return ipAddr;
     }
-
 
     /**
      * 获取发起request请求的客户端的IP地址(IPV4)，不使用request.getRemoteAddr()的原因是有可能用户使用了代理软件方式避免真实IP地址,

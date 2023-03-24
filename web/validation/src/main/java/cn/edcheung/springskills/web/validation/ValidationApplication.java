@@ -2,7 +2,7 @@ package cn.edcheung.springskills.web.validation;
 
 import cn.edcheung.springskills.web.validation.bean.ResultBean;
 import cn.edcheung.springskills.web.validation.bean.ResultBeanBuilder;
-import cn.edcheung.springskills.web.validation.enums.ResponseCode;
+import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 import cn.edcheung.springskills.web.validation.exception.BusinessException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +32,10 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Set;
 
-
+/**
+ * Java异常处理机制，当一个异常被抛出时，JVM会在当前的方法里寻找一个匹配的处理，如果没有找到，这个方法会强制结束并弹出当前栈帧，并且异常会重新抛给上层调用的方法（在调用方法帧）。
+ * 如果在所有帧弹出前仍然没有找到合适的异常处理，这个线程将终止。如果这个异常在最后一个非守护线程里抛出，将会导致JVM自己终止，比如这个线程是个main线程。
+ */
 @RestControllerAdvice(basePackages = {"cn.edcheung.web.validation.controller", "cn.edcheung.web.validation.service"})
 @SpringBootApplication(scanBasePackages = "cn.edcheung.*")
 public class ValidationApplication implements ResponseBodyAdvice<Object> {
@@ -56,13 +59,13 @@ public class ValidationApplication implements ResponseBodyAdvice<Object> {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 // 将数据包装在ResultBean里后，再转换为json字符串响应给前端
-                return objectMapper.writeValueAsString(new ResultBean<>(ResponseCode.SUCCESS, data));
+                return objectMapper.writeValueAsString(new ResultBean<>(ErrorCode.SUCCESS, data));
             } catch (JsonProcessingException e) {
                 throw new BusinessException("返回String类型错误");
             }
         }
         // 将原本的数据包装在ResultBean里
-        return new ResultBean<>(ResponseCode.SUCCESS, data);
+        return new ResultBean<>(ErrorCode.SUCCESS, data);
     }
 
     /**
@@ -83,11 +86,11 @@ public class ValidationApplication implements ResponseBodyAdvice<Object> {
             // 参数类型不匹配
             // 例如说，接口上设置了 @RequestParam("xx") 参数为 Integer，结果传递 xx 参数类型为 String
             String msg = MessageFormat.format("参数类型错误{0}", ((MethodArgumentTypeMismatchException) e).getName());
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
         } else if (e instanceof MissingServletRequestParameterException) {
             // 缺少参数异常
             String msg = MessageFormat.format("缺少参数{0}", ((MissingServletRequestParameterException) e).getParameterName());
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
         } else if (e instanceof ConstraintViolationException) {
             // 单个参数校验异常
             Set<ConstraintViolation<?>> sets = ((ConstraintViolationException) e).getConstraintViolations();
@@ -100,40 +103,40 @@ public class ValidationApplication implements ResponseBodyAdvice<Object> {
                     sb.append(error.getMessage()).append(";");
                 });
                 String msg = sb.substring(0, sb.length() - 1);
-                return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
             }
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001);
         } else if (e instanceof MethodArgumentNotValidException) {
             // post请求的对象参数校验异常
             List<ObjectError> errors = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors();
             String msg = getValidExceptionMsg(errors);
             if (msg != null) {
-                return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
             }
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001);
         } else if (e instanceof BindException) {
             // get请求的对象参数校验异常
             List<ObjectError> errors = ((BindException) e).getBindingResult().getAllErrors();
             String msg = getValidExceptionMsg(errors);
             if (msg != null) {
-                return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+                return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
             }
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
             // 请求方法不支持
             // 例如说，A 接口的方法为 GET 方式，结果请求方法为 POST 方式，导致不匹配
             String msg = MessageFormat.format("不支持的请求{0}", ((HttpRequestMethodNotSupportedException) e).getMethod());
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
         } else if (e instanceof NoHandlerFoundException) {
             // 请求url不存在
             // 注意，它需要设置如下两个配置项：
             // 1. spring.mvc.throw-exception-if-no-handler-found 为 true
             // 2. spring.mvc.static-path-pattern 为 /statics/**
             String msg = MessageFormat.format("不存在的请求{0}", ((NoHandlerFoundException) e).getRequestURL());
-            return ResultBeanBuilder.error(ResponseCode.ERROR11001, msg);
+            return ResultBeanBuilder.error(ErrorCode.ERROR11001, msg);
         } else {
             // 未知异常
-            return ResultBeanBuilder.error(ResponseCode.ERROR10000);
+            return ResultBeanBuilder.error(ErrorCode.ERROR10000);
         }
     }
 

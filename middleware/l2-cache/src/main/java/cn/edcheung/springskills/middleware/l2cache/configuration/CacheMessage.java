@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class CacheMessage implements Serializable {
 
-    private static final long serialVersionUID = 5987219310442078193L;
+    private static final long serialVersionUID = 1L;
 
     private String cacheName;
     private Object key;

@@ -21,9 +21,9 @@ import java.util.Properties;
  */
 public class PropertiesLoader {
 
-    private static Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
 
-    private static ResourceLoader resourceLoader = new DefaultResourceLoader();
+    private static final ResourceLoader RESOURCE_LOADER = new DefaultResourceLoader();
 
     private final Properties properties;
 
@@ -130,7 +130,7 @@ public class PropertiesLoader {
         for (String location : resourcesPaths) {
             InputStream is = null;
             try {
-                Resource resource = resourceLoader.getResource(location);
+                Resource resource = RESOURCE_LOADER.getResource(location);
                 is = resource.getInputStream();
                 props.load(is);
             } catch (IOException ex) {

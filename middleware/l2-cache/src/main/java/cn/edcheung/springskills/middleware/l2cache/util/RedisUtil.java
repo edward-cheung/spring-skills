@@ -231,7 +231,6 @@ public class RedisUtil {
         return count == null ? 0 : count;
     }
 
-
     /**
      * 往List中右侧存入多个数据
      *
@@ -243,7 +242,6 @@ public class RedisUtil {
         Long count = redisTemplate.opsForList().rightPushAll(key, values);
         return count == null ? 0 : count;
     }
-
 
     /**
      * 从List中获取begin到end之间的元素
@@ -257,7 +255,6 @@ public class RedisUtil {
         return redisTemplate.opsForList().range(key, start, end);
     }
 
-
     /**
      * 从List左侧弹出数据
      *
@@ -267,7 +264,6 @@ public class RedisUtil {
     public static Object listGetL(final String key) {
         return redisTemplate.opsForList().leftPop(key);
     }
-
 
     /**
      * 从List右侧弹出数据

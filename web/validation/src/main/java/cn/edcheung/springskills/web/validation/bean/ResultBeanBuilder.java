@@ -1,6 +1,6 @@
 package cn.edcheung.springskills.web.validation.bean;
 
-import cn.edcheung.springskills.web.validation.enums.ResponseCode;
+import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.Map;
@@ -15,16 +15,15 @@ import java.util.Map;
 public class ResultBeanBuilder {
 
     public static <T> ResultBean<T> success(T data) {
-        return new ResultBean<>(ResponseCode.SUCCESS, data);
+        return new ResultBean<>(ErrorCode.SUCCESS, data);
     }
 
     public static <T> ResultBean<Map> success(Map data) {
-        return new ResultBean<>(ResponseCode.SUCCESS, data);
+        return new ResultBean<>(ErrorCode.SUCCESS, data);
     }
 
-
     public static <T> ResultBean<T> success() {
-        return new ResultBean<>(ResponseCode.SUCCESS);
+        return new ResultBean<>(ErrorCode.SUCCESS);
     }
 
     public static <T> ResultBean<T> is(Boolean result) {
@@ -38,45 +37,51 @@ public class ResultBeanBuilder {
      * 操作失败
      */
     public static <T> ResultBean<T> error() {
-        return buildError(ResponseCode.ERROR11006, ResponseCode.ERROR11006.value());
+        return buildError(ErrorCode.ERROR11006, ErrorCode.ERROR11006.getMessage());
     }
 
     /**
      * 操作失败-消息
      */
     public static <T> ResultBean<T> error(String message) {
-        return buildError(ResponseCode.ERROR11006, message);
+        return buildError(ErrorCode.ERROR11006, message);
+    }
+
+    /**
+     * 操作失败-错误码，消息
+     */
+    public static <T> ResultBean<T> error(String code, String message) {
+        return buildError(code, message);
     }
 
     /**
      * 参数不正确-请检查参数是否正确
      */
     public static <T> ResultBean<T> argumentError(String message) {
-        return buildError(ResponseCode.ERROR11001, message);
+        return buildError(ErrorCode.ERROR11001, message);
     }
 
     /**
      * 内部错误-网络连接失败，请稍后再试
      */
     public static <T> ResultBean<T> innerError() {
-        return buildError(ResponseCode.ERROR11001, ResponseCode.ERROR10000.value());
+        return buildError(ErrorCode.ERROR11001, ErrorCode.ERROR10000.getCode());
     }
 
-
-    public static <T> ResultBean<T> error(ResponseCode responseCode, String message) {
-        return buildError(responseCode, message);
+    public static <T> ResultBean<T> error(ErrorCode errorCode, String message) {
+        return buildError(errorCode, message);
     }
 
-    public static <T> ResultBean<T> error(ResponseCode responseCode) {
-        return buildError(responseCode, responseCode.value());
+    public static <T> ResultBean<T> error(ErrorCode errorCode) {
+        return buildError(errorCode, errorCode.getMessage());
     }
 
     /**
      * 返回错误内容
      * 注意：如果走feign返回可能存在转换问题
      */
-    public static <T> ResultBean<T> errorData(ResponseCode responseCode, T data) {
-        ResultBean<T> resultBean = new ResultBean<>(responseCode);
+    public static <T> ResultBean<T> errorData(ErrorCode errorCode, T data) {
+        ResultBean<T> resultBean = new ResultBean<>(errorCode);
         resultBean.setData(data);
         return resultBean;
     }
@@ -84,10 +89,24 @@ public class ResultBeanBuilder {
     /**
      * 错误消息
      */
-    private static <T> ResultBean<T> buildError(ResponseCode responseCode, String message) {
-        ResultBean<T> resultBean = new ResultBean<>(responseCode);
+    private static <T> ResultBean<T> buildError(ErrorCode errorCode, String message) {
+        ResultBean<T> resultBean = new ResultBean<>(errorCode);
         if (Strings.isEmpty(message)) {
-            resultBean.setMsg(responseCode.value());
+            resultBean.setMsg(errorCode.getMessage());
+        } else {
+            resultBean.setMsg(message);
+        }
+        // 不能设置值，data可能是对象
+        return resultBean;
+    }
+
+    /**
+     * 错误消息
+     */
+    private static <T> ResultBean<T> buildError(String errorCode, String message) {
+        ResultBean<T> resultBean = new ResultBean<>(errorCode,message, null);
+        if (Strings.isEmpty(message)) {
+            resultBean.setMsg(errorCode);
         } else {
             resultBean.setMsg(message);
         }

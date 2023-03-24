@@ -214,12 +214,10 @@ public class LombokPlugin extends PluginAdapter {
         EQUALS_AND_HASHCODE("equalsAndHashCode", "@EqualsAndHashCode(of = \"id\")", "lombok.EqualsAndHashCode"),
         TO_STRING("toString", "@ToString", "lombok.ToString");
 
-
         private final String paramName;
         private final String name;
         private final FullyQualifiedJavaType javaType;
         private final List<String> options;
-
 
         Annotations(String paramName, String name, String className) {
             this.paramName = paramName;

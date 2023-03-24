@@ -1,7 +1,7 @@
 package cn.edcheung.springskills.web.validation.bean;
 
 
-import cn.edcheung.springskills.web.validation.enums.ResponseCode;
+import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 
 import java.io.Serializable;
 
@@ -13,45 +13,42 @@ public class ResultBean<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 时间戳
-     */
-    private long time = System.currentTimeMillis();
-    /**
      * 错误码
      */
     private String code;
-
     /**
      * 消息
      */
     private String msg;
-
     /**
      * 数据
      */
     private T data;
-
     /**
      * 版本号
      */
     private String version = "1.0.0";
+    /**
+     * 时间戳
+     */
+    private long time = System.currentTimeMillis();
 
     /**
      * 注意:不要设置错误消息到data中(data类型不一定是字符串类型）
      * 建议使用ResultBeanBuilder
      *
-     * @param responseCode 返回码
-     * @param data         数据
+     * @param errorCode 返回码
+     * @param data      数据
      */
-    public ResultBean(ResponseCode responseCode, T data) {
-        this.code = responseCode.code();
-        this.msg = responseCode.value();
+    public ResultBean(ErrorCode errorCode, T data) {
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMessage();
         this.data = data;
     }
 
-    public ResultBean(ResponseCode responseCode) {
-        this.code = responseCode.code();
-        this.msg = responseCode.value();
+    public ResultBean(ErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMessage();
     }
 
     public ResultBean(String code, String msg, T data) {
@@ -63,9 +60,9 @@ public class ResultBean<T> implements Serializable {
     public ResultBean() {
     }
 
-    /*public boolean getResult() {
-        return ResponseCode.SUCCESS.code().equals(this.code);
-    }*/
+    public boolean succeed() {
+        return ErrorCode.SUCCESS.getCode().equals(this.code);
+    }
 
     public String getCode() {
         return code;
@@ -90,4 +87,5 @@ public class ResultBean<T> implements Serializable {
     public void setData(T data) {
         this.data = data;
     }
+
 }

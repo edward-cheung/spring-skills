@@ -183,7 +183,6 @@ public class BasePlugin extends PluginAdapter {
         fieldAnnotation(field, introspectedColumn.getRemarks());
         // 生成注释结束
 
-
         // 追加ApiModelProperty注解
         topLevelClass.addImportedType(new FullyQualifiedJavaType(Annotation.ApiModelProperty.getClazz()));
         field.addAnnotation(Annotation.ApiModelProperty.getAnnotation() + "(value=\"" + introspectedColumn.getRemarks() + "\",name=\"" + introspectedColumn.getJavaProperty() + "\")");
@@ -413,7 +412,6 @@ public class BasePlugin extends PluginAdapter {
             template.process(dataMap, out);
         }
     }
-
 
     // 生成实现类
     public void generateImplFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) throws IOException, TemplateException {
