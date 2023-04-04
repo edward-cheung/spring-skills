@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.web.validation.exceptionHandler;
+package cn.edcheung.springskills.web.validation.mvc;
 
 import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 

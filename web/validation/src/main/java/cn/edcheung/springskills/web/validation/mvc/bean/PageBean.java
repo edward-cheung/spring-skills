@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.web.validation.bean;
+package cn.edcheung.springskills.web.validation.mvc.bean;
 
 import com.github.pagehelper.Page;
 

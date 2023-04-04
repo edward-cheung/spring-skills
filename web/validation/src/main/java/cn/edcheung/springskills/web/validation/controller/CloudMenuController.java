@@ -1,10 +1,10 @@
 package cn.edcheung.springskills.web.validation.controller;
 
 import cn.edcheung.springskills.db.persistence.dto.MenuDto;
-import cn.edcheung.springskills.web.validation.bean.PageBean;
-import cn.edcheung.springskills.web.validation.bean.ResultBean;
-import cn.edcheung.springskills.web.validation.bean.ResultBeanBuilder;
 import cn.edcheung.springskills.web.validation.model.CloudMenu;
+import cn.edcheung.springskills.web.validation.mvc.bean.PageBean;
+import cn.edcheung.springskills.web.validation.mvc.bean.ResultBean;
+import cn.edcheung.springskills.web.validation.mvc.bean.ResultBeanBuilder;
 import cn.edcheung.springskills.web.validation.service.ICloudMenuService;
 import cn.edcheung.springskills.web.validation.util.TreeUtil;
 import com.github.pagehelper.PageHelper;

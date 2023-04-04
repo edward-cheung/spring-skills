@@ -1,5 +1,6 @@
-package cn.edcheung.springskills.web.validation.config;
+package cn.edcheung.springskills.web.validation.mvc.config;
 
+import cn.edcheung.springskills.web.validation.mvc.interceptor.LogInterceptor;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,7 +60,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")
 //                .allowedOrigins("*")
-//                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
+//                .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
 //                .allowCredentials(true)
 //                .allowedHeaders("*")
 //                .maxAge(3600);
@@ -80,7 +81,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 多个拦截器组成一个拦截器链
-        // addPathPatterns 用于添加拦截规则，/**表示拦截所有请求
-        // excludePathPatterns 用户排除拦截
+        registry.addInterceptor(new LogInterceptor())
+                // addPathPatterns 用于添加拦截规则，/**表示拦截所有请求
+                // excludePathPatterns 用户排除拦截
+                .addPathPatterns("/**");
     }
 }

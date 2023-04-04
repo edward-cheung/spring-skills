@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.web.validation.config;
+package cn.edcheung.springskills.web.validation.mvc.config;
 
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.oas.annotations.EnableOpenApi;

@@ -1,7 +1,8 @@
-package cn.edcheung.springskills.web.validation.exceptionHandler;
+package cn.edcheung.springskills.web.validation.mvc.advice;
 
 import cn.edcheung.springskills.web.validation.exception.BusinessException;
 import cn.edcheung.springskills.web.validation.exception.SystemException;
+import cn.edcheung.springskills.web.validation.mvc.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -16,7 +16,7 @@ public class CloudMenu implements Serializable {
     private static final long serialVersionUID = 1L;
     // 在参数类中需要校验的属性上，在注解中添加groups属性
     // 然后在controller的方法中，在@Validated注解里指定哪种场景即可，没有指定就代表采用Default.class，采用其他分组就需要显示指定
-    // @NotNull(groups = WhenUpdate.class, message = "id不能为空")
+    // @NotNull(groups = ToUpdate.class, message = "id不能为空")
     private Long id;
     /**
      * 菜单名称

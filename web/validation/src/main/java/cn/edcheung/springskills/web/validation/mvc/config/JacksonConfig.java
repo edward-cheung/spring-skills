@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.web.validation.config;
+package cn.edcheung.springskills.web.validation.mvc.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;

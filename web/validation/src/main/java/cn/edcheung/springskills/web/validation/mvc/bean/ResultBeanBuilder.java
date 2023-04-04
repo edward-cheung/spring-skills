@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.web.validation.bean;
+package cn.edcheung.springskills.web.validation.mvc.bean;
 
 import cn.edcheung.springskills.web.validation.enums.ErrorCode;
 import org.apache.logging.log4j.util.Strings;
