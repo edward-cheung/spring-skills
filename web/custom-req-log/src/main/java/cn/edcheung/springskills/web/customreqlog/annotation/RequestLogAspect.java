@@ -41,7 +41,7 @@ public class RequestLogAspect {
     private static final Logger log = LoggerFactory.getLogger(RequestLogAspect.class);
 
     /**
-     * 获取当前 HttpServletRequest 的第一种方式：自动注入HttpServletRequest对象
+     * 获取当前HttpServletRequest的第一种方式：自动注入HttpServletRequest对象
      */
 //    @Autowired
 //    private HttpServletRequest request;

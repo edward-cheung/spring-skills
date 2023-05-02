@@ -1,4 +1,4 @@
-package cn.edcheung.springskills.util.customthreadpool;
+package cn.edcheung.springskills.util.customthreadpool.constans;
 
 public interface Constants {
 

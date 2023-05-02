@@ -1,6 +1,6 @@
 package cn.edcheung.springskills.web.validation.mvc.interceptor;
 
-import cn.edcheung.springskills.util.customthreadpool.Constants;
+import cn.edcheung.springskills.util.customthreadpool.constans.Constants;
 import org.slf4j.MDC;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
