@@ -40,8 +40,8 @@ public class TimeServer {
                     // accept queue：保存三次握手已完成，内核正等待进程执行accept的调用的连接。
                     .option(ChannelOption.SO_BACKLOG, 64)
                     // Socket参数，TCP数据接收缓冲区大小。需要注意的是：当设置值超过64KB时，需要在绑定到本地端口前设置。
-                    // 该值设置的是由ServerSocketChannel使用accept接受的SocketChannel的接收缓冲区。
-                    .option(ChannelOption.SO_RCVBUF, 32 * 1024)
+                    // 该值设置的是由ServerSocketChannel使用accept接受的SocketChannel的接收缓冲区。通常建议值为128K或者256K。
+                    .option(ChannelOption.SO_RCVBUF, 2 >> 18)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChildChannelHandler());
             // 绑定端口，同步等待成功
