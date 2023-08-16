@@ -20,7 +20,7 @@ public class ScheduledTaskConfig implements SchedulingConfigurer {
 
     @Scheduled(fixedRate = 3 * 1000L)
     public void test() {
-        System.out.println(123);
+        System.out.println("hello world");
     }
 
     @Override
