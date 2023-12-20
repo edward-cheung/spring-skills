@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisCaffeineCacheManager implements CacheManager {
 
-    private final Logger logger = LoggerFactory.getLogger(RedisCaffeineCacheManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisCaffeineCacheManager.class);
 
     private ConcurrentMap<String, Cache> cacheMap = new ConcurrentHashMap<>();
 

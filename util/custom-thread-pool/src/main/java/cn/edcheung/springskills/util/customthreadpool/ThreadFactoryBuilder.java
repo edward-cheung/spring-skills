@@ -3,6 +3,7 @@ package cn.edcheung.springskills.util.customthreadpool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.MessageFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
@@ -126,10 +127,10 @@ public class ThreadFactoryBuilder {
      */
     public ThreadFactoryBuilder priority(int priority) {
         if (priority < Thread.MIN_PRIORITY) {
-            throw new IllegalArgumentException(String.format("Thread priority ({}) must be >= {}", priority, Thread.MIN_PRIORITY));
+            throw new IllegalArgumentException(MessageFormat.format("Thread priority ({}) must be >= {}", priority, Thread.MIN_PRIORITY));
         }
         if (priority > Thread.MAX_PRIORITY) {
-            throw new IllegalArgumentException(String.format("Thread priority ({}) must be <= {}", priority, Thread.MAX_PRIORITY));
+            throw new IllegalArgumentException(MessageFormat.format("Thread priority ({}) must be <= {}", priority, Thread.MAX_PRIORITY));
         }
         this.priority = priority;
         return this;
@@ -155,24 +156,28 @@ public class ThreadFactoryBuilder {
 
     public static class CustomUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-        private static final Logger log = LoggerFactory.getLogger(CustomUncaughtExceptionHandler.class);
+        private static final Logger logger = LoggerFactory.getLogger(CustomUncaughtExceptionHandler.class);
 
         @Override
         public void uncaughtException(Thread t, Throwable e) {
-            log.error(t.toString() + "执行任务异常", e);
+            logger.error(t.toString() + "执行任务异常", e);
+            if (e instanceof RuntimeException) {
+                throw (RuntimeException)e;
+            } else if (e instanceof Error) {
+                throw (Error)e;
+            } else {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     public static class CustomRejectedExecutionHandler implements RejectedExecutionHandler {
 
-        private static final Logger log = LoggerFactory.getLogger(CustomRejectedExecutionHandler.class);
-
-        public CustomRejectedExecutionHandler() {
-        }
+        private static final Logger logger = LoggerFactory.getLogger(CustomRejectedExecutionHandler.class);
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            log.error(executor.toString() + "拒绝任务");
+            logger.error(executor.toString() + "拒绝任务：" + r.getClass());
         }
     }
 }

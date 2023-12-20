@@ -8,7 +8,7 @@ import lombok.Data;
 *
 * ${file_name}Vo
 *
-* @author 系统
+* @author author
 * @created Create Time:  ${date?string('yyyy-MM-dd hh:mm:ss')}
 */
 @ApiModel(description="扩展信息")

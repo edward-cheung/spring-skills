@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMessage;
 @SuppressWarnings("unused")
 public class MailSenderUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(MailSenderUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailSenderUtil.class);
 
     @Autowired
     private JavaMailSender mailSender;
@@ -60,7 +60,7 @@ public class MailSenderUtil {
             helper.setSubject(mailBean.getSubject());
             helper.setText(mailBean.getText());
         } catch (MessagingException e) {
-            log.error("发送简易邮件异常", e);
+            logger.error("发送简易邮件异常", e);
 //            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
         mailSender.send(mimeMessage);
@@ -82,7 +82,7 @@ public class MailSenderUtil {
             helper.setText(mailBean.getText(), true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("发送HTML邮件异常", e);
+            logger.error("发送HTML邮件异常", e);
 //            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
@@ -105,7 +105,7 @@ public class MailSenderUtil {
             helper.addAttachment(mailBean.getAttachmentFilename(), mailBean.getFile());
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("发送附件邮件异常", e);
+            logger.error("发送附件邮件异常", e);
 //            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
@@ -133,7 +133,7 @@ public class MailSenderUtil {
             helper.addInline(mailBean.getContentId(), mailBean.getFile());
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("发送内联资源邮件异常", e);
+            logger.error("发送内联资源邮件异常", e);
 //            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
@@ -154,7 +154,7 @@ public class MailSenderUtil {
             helper.setText(mailBean.getText(), true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("发送模板邮件异常", e);
+            logger.error("发送模板邮件异常", e);
 //            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }

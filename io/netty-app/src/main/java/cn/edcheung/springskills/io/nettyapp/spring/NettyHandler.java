@@ -39,6 +39,8 @@ public class NettyHandler extends SimpleChannelInboundHandler<String> {
     private ServerProperties serverProperties;
     @Resource
     private NettyClient nettyClient;
+    @Resource
+    private ParseThread parseThread;
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
@@ -62,6 +64,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<String> {
             logger.debug("接收数据: " + value);
         }
         // 处理数据
+        parseThread.addPacket(value);
     }
 
     @Override

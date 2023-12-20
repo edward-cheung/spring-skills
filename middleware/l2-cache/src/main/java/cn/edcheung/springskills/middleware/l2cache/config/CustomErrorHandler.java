@@ -21,25 +21,25 @@ import org.springframework.cache.interceptor.CacheErrorHandler;
  */
 public class CustomErrorHandler implements CacheErrorHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomErrorHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomErrorHandler.class);
 
     @Override
     public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
-        log.error("读取缓存失败" + cache.getName(), e);
+        logger.error("读取缓存失败" + cache.getName(), e);
     }
 
     @Override
     public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
-        log.error("写入缓存失败" + cache.getName(), e);
+        logger.error("写入缓存失败" + cache.getName(), e);
     }
 
     @Override
     public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
-        log.error("删除缓存失败" + cache.getName(), e);
+        logger.error("删除缓存失败" + cache.getName(), e);
     }
 
     @Override
     public void handleCacheClearError(RuntimeException e, Cache cache) {
-        log.error("清空缓存失败" + cache.getName(), e);
+        logger.error("清空缓存失败" + cache.getName(), e);
     }
 }

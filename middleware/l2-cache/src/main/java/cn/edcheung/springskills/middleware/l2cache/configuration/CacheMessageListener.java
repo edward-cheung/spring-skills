@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class CacheMessageListener implements MessageListener {
 
-    private final Logger logger = LoggerFactory.getLogger(CacheMessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(CacheMessageListener.class);
 
     private RedisTemplate<Object, Object> redisTemplate;
 

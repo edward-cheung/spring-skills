@@ -15,10 +15,17 @@ import java.lang.reflect.Method;
  */
 public class CustomAsyncUncaughtExceptionHandler implements AsyncUncaughtExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomAsyncUncaughtExceptionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomAsyncUncaughtExceptionHandler.class);
 
     @Override
     public void handleUncaughtException(Throwable throwable, Method method, Object... params) {
-        log.error("异步多线程执行异常。方法：[{}]，异常信息[{}] : {}", method, throwable.getMessage(), throwable);
+        logger.error("异步多线程执行异常。方法：[{}]，异常信息[{}] : {}", method, throwable.getMessage(), throwable);
+        if (throwable instanceof RuntimeException) {
+            throw (RuntimeException)throwable;
+        } else if (throwable instanceof Error) {
+            throw (Error)throwable;
+        } else {
+            throw new RuntimeException(throwable);
+        }
     }
 }

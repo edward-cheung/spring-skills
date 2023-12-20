@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class CustomThreadPoolExecutor extends ThreadPoolExecutor {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomThreadPoolExecutor.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomThreadPoolExecutor.class);
 
     private static final ThreadLocal<Long> TASK_CONTEXT = new ThreadLocal<>();
 
@@ -79,7 +79,7 @@ public class CustomThreadPoolExecutor extends ThreadPoolExecutor {
         if (t == null) {
             // 只统计执行成功的任务
             final long executeTime = System.currentTimeMillis() - TASK_CONTEXT.get();
-            log.info("执行时间：" + executeTime);
+            logger.info("执行时间：" + executeTime);
             final ReentrantLock mainLock = this.mainLock;
             mainLock.lock();
             try {

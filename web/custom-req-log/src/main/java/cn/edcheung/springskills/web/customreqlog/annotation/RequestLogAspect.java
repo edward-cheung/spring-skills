@@ -38,7 +38,7 @@ import java.util.Set;
 @Component
 public class RequestLogAspect {
 
-    private static final Logger log = LoggerFactory.getLogger(RequestLogAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(RequestLogAspect.class);
 
     /**
      * 获取当前HttpServletRequest的第一种方式：自动注入HttpServletRequest对象
@@ -160,12 +160,12 @@ public class RequestLogAspect {
             }
             if (methodAnnotationRequestLog.requestSaveDb()) {
                 // 异步保存日志到数据库
-                log.info("保存日志到数据库");
+                logger.info("保存日志到数据库");
             }
-            log.info(operationLog.toString());
+            logger.info(operationLog.toString());
         } catch (Exception ex) {
             // 记录本地异常日志
-            log.error("日志记录异常：", ex);
+            logger.error("日志记录异常：", ex);
         }
     }
 
