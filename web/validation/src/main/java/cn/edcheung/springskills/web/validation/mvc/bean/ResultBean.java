@@ -16,18 +16,22 @@ public class ResultBean<T> implements Serializable {
      * 错误码
      */
     private String code;
+
     /**
      * 消息
      */
     private String msg;
+
     /**
      * 数据
      */
     private T data;
+
     /**
      * 版本号
      */
     private String version = "1.0.0";
+
     /**
      * 时间戳
      */

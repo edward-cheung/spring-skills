@@ -18,18 +18,22 @@ public class PageBean<T> implements Serializable {
      * 当前页
      **/
     private int pageNum = 1;
+
     /**
      * 每页的数量
      **/
     private int pageSize = 10;
+
     /**
      * 总记录数
      **/
     private long total;
+
     /**
      * 总页数
      **/
     private int pages;
+
     /**
      * 结果集
      **/

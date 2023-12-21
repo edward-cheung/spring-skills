@@ -22,7 +22,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @since JDK 1.8
  */
 public class RedisCaffeineCache extends AbstractValueAdaptingCache {
+
     private static final Logger logger = LoggerFactory.getLogger(RedisCaffeineCache.class);
+
     private String name;
     private RedisTemplate<Object, Object> redisTemplate;
     private Cache<Object, Object> caffeineCache;

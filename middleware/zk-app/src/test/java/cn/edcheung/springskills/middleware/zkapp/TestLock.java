@@ -10,6 +10,7 @@ import cn.edcheung.springskills.middleware.zkapp.lock.AbstractZookeeperLock;
  * @since JDK 1.8
  */
 public abstract class TestLock<String> extends AbstractZookeeperLock<String> {
+
     private static final java.lang.String LOCK_PATH = "test_";
 
     private String lockId;

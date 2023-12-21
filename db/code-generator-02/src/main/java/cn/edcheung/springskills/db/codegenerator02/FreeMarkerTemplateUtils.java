@@ -12,6 +12,7 @@ import java.io.IOException;
  * FreeMarkerTemplateUtils
  */
 public class FreeMarkerTemplateUtils {
+
     private static final Configuration CONFIGURATION = new Configuration(Configuration.VERSION_2_3_22);
 
     static {

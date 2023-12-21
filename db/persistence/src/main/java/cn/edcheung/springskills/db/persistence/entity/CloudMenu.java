@@ -12,56 +12,74 @@ import java.util.Date;
  * @since 2020-03-31
  */
 public class CloudMenu implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 菜单id
+     */
     private Long id;
+
     /**
      * 菜单名称
      */
     private String name;
+
     /**
      * 菜单编码
      */
     private String code;
+
     /**
      * 图标
      */
     private String img;
+
     /**
      * 菜单地址
      */
     private String url;
+
     /**
      * 菜单父级Id
      */
     private Long pid;
+
     /**
      * 菜单父级名称
      */
     private Long parentName;
+
     /**
      * 菜单等级，分一级菜单和二级菜单
      */
     private Integer level;
+
     /**
      * 顺序
      */
     private Integer orders;
+
     /**
      * 状态：0禁用，1启用
      */
     private Boolean status;
+
     /**
      * 系统编码
      */
     private String cloudCode;
+
     /**
      * 是否删除：0否，1是
      */
     private Boolean isDelete;
+
     /**
      * 创建日期
      */
     private Date gmtCreate;
+
     /**
      * 修改日期
      */

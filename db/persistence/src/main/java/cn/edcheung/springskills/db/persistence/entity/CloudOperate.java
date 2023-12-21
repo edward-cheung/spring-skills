@@ -12,44 +12,59 @@ import java.util.Date;
  * @since 2020-03-31
  */
 public class CloudOperate implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 菜单功能id
+     */
     private Long id;
+
     /**
      * 功能名称
      */
     private String name;
+
     /**
      * 功能编码
      */
     private String code;
+
     /**
      * 功能跳转路径地址
      */
     private String url;
+
     /**
      * 所属菜单code
      */
     private String menuCode;
+
     /**
      * 所属菜单名称
      */
     private String menuName;
+
     /**
      * 状态：0禁用，1启用
      */
     private Boolean status;
+
     /**
      * 系统编码
      */
     private String cloudCode;
+
     /**
      * 是否删除：0否，1是
      */
     private Boolean isDelete;
+
     /**
      * 创建日期
      */
     private Date gmtCreate;
+
     /**
      * 修改日期
      */

@@ -59,7 +59,7 @@ public class CuratorServiceImpl implements CuratorService {
         CuratorListener listener = new CuratorListener() {
             @Override
             public void eventReceived(CuratorFramework client, CuratorEvent event) throws Exception {
-                //examine event for details
+                // examine event for details
             }
         };
         curatorClient.getCuratorListenable().addListener(listener);

@@ -14,6 +14,7 @@ import java.util.Properties;
  * 自定义注释生成器
  */
 public class CommentGenerator extends DefaultCommentGenerator {
+
     private static final String EXAMPLE_SUFFIX = "Example";
     private static final String API_MODEL_PROPERTY_FULL_CLASS_NAME = "io.swagger.annotations.ApiModelProperty";
     private boolean addRemarkComments = false;
@@ -34,14 +35,14 @@ public class CommentGenerator extends DefaultCommentGenerator {
     public void addFieldComment(Field field, IntrospectedTable introspectedTable,
                                 IntrospectedColumn introspectedColumn) {
         String remarks = introspectedColumn.getRemarks();
-        //根据参数和备注信息判断是否添加备注信息
+        // 根据参数和备注信息判断是否添加备注信息
         if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
             this.addFieldJavaDoc(field, remarks);
-            //数据库中特殊字符需要转义
+            // 数据库中特殊字符需要转义
             if (remarks.contains("\"")) {
                 remarks = remarks.replace("\"", "'");
             }
-            //给model的字段添加swagger注解
+            // 给model的字段添加swagger注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
         }
     }
@@ -50,21 +51,21 @@ public class CommentGenerator extends DefaultCommentGenerator {
      * 给model的字段添加注释
      */
     private void addFieldJavaDoc(Field field, String remarks) {
-        //文档注释开始
+        // 文档注释开始
         field.addJavaDocLine("/**");
-        //获取数据库字段的备注信息
+        // 获取数据库字段的备注信息
         String[] remarkLines = remarks.split(System.getProperty("line.separator"));
         for (String remarkLine : remarkLines) {
             field.addJavaDocLine(" * " + remarkLine);
         }
-//        super.addJavadocTag(field, false);
+        //super.addJavadocTag(field, false);
         field.addJavaDocLine(" */");
     }
 
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
         super.addJavaFileComment(compilationUnit);
-        //只在model中添加swagger注解类的导入
+        // 只在model中添加swagger注解类的导入
         if (!compilationUnit.isJavaInterface() && !compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)) {
             compilationUnit.addImportedType(new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
         }

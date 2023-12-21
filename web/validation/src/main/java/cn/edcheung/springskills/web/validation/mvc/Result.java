@@ -15,14 +15,17 @@ public class Result<T> implements Serializable {
      * 错误码
      */
     private final String code;
+
     /**
      * 提示信息
      */
     private final String message;
+
     /**
      * 返回数据
      */
     private final T data;
+
     /**
      * 是否成功
      */

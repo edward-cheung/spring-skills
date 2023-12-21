@@ -221,7 +221,7 @@ public class HBaseService implements InitializingBean, DisposableBean {
         // scan.setFilter(list);
 
         ResultScanner resultScanner = table.getScanner(scan);
-        //结果解析
+        // 结果解析
         for (Result result : resultScanner) {
             Cell[] cells = result.rawCells();
             for (Cell cell : cells) {

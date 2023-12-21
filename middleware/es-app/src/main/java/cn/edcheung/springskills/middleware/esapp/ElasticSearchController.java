@@ -165,7 +165,7 @@ public class ElasticSearchController {
         int from = 0;
         // 分页参数，相当于pageSize
         int size = 2;
-        //设置分页参数
+        // 设置分页参数
         searchSourceBuilder.from(from);
         searchSourceBuilder.size(size);
 

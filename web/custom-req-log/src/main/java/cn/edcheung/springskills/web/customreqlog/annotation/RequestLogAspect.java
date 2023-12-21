@@ -86,7 +86,7 @@ public class RequestLogAspect {
             // 获取当前 HttpServletRequest 的第二种方式
             HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
             CloudOperationLog operationLog = new CloudOperationLog();
-            // operationLog.setId(UUID.randomUUID().toString().replaceAll("-", "")); // 维护索引代价较大
+            //operationLog.setId(UUID.randomUUID().toString().replaceAll("-", "")); // 维护索引代价较大
             operationLog.setCreateDate(LocalDateTime.now());
             operationLog.setOperationEmployeeId(1L);
             operationLog.setOperationEmployeeName("超级管理员");

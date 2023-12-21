@@ -61,15 +61,15 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         // 配置序列化（解决乱码的问题）
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofHours(3L)) //设置缓存的默认超时时间
-                .disableCachingNullValues() //如果是空值，不缓存
-                .computePrefixWith(key -> key + ":") //覆盖默认的构造key，否则会多出一个冒号
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer)) //设置key序列化器
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer((valueSerializer))); //设置value序列化器
+                .entryTtl(Duration.ofHours(3L)) // 设置缓存的默认超时时间
+                .disableCachingNullValues() // 如果是空值，不缓存
+                .computePrefixWith(key -> key + ":") // 覆盖默认的构造key，否则会多出一个冒号
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer)) // 设置key序列化器
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer((valueSerializer))); // 设置value序列化器
 
         return RedisCacheManager.builder(redisCacheWriter)
                 .cacheDefaults(configuration)
-                .transactionAware() //开启事务
+                .transactionAware() // 开启事务
                 .build();
     }
 
@@ -78,7 +78,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 自定义CacheResolver在调用resolveCaches选择CacheManager前，先判断此次读写的缓存key是否是热数据。
      * 如果是热数据则使用堆内存的CacheManager，否则使用redis的CacheManager。
      */
-//    @Bean
+    //@Bean
     @Override
     public CacheResolver cacheResolver() {
         // 通过Guava实现的自定义堆内存缓存管理器

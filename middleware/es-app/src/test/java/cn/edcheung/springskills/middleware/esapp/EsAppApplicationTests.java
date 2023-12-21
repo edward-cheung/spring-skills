@@ -49,11 +49,11 @@ class EsAppApplicationTests {
         // 设置索引  类型
         String index = "users";
         String type = "man";
-        //设置索引的信息:分片 备份
+        // 设置索引的信息:分片 备份
         Settings.Builder settings = Settings.builder()
                 .put("number_of_shards", 3)
                 .put("number_of_replicas", 1);
-        //构建mapping
+        // 构建mapping
         XContentBuilder mapping = JsonXContent.contentBuilder()
                 .startObject().startObject("properties")
                 //.startObject("_all").field("enabled", false).endObject()
@@ -74,8 +74,8 @@ class EsAppApplicationTests {
                 .mapping(type, mapping.contentType());
         // 执行客户端请求
         CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
-        boolean acknowledged = response.isAcknowledged();//指示是否所有节点都已确认请求
-        boolean shardsAcknowledged = response.isShardsAcknowledged();//指示是否在超时之前为索引中的每个分片启动了必需的分片副本数
+        boolean acknowledged = response.isAcknowledged(); // 指示是否所有节点都已确认请求
+        boolean shardsAcknowledged = response.isShardsAcknowledged(); // 指示是否在超时之前为索引中的每个分片启动了必需的分片副本数
         // 获取响应数据
         System.out.println(response);
     }
@@ -130,7 +130,7 @@ class EsAppApplicationTests {
 
         // 同步执行（也可以使用异步）
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-        //分析结果
+        // 分析结果
         System.out.println(searchResponse);
     }
 
@@ -156,7 +156,7 @@ class EsAppApplicationTests {
 
         // 同步执行（也可以使用异步）
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-        //分析结果
+        // 分析结果
         System.out.println(searchResponse);
         // 获取所有命中的结果
         SearchHits hits = searchResponse.getHits();

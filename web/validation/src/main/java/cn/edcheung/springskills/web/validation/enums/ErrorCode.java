@@ -52,6 +52,7 @@ public enum ErrorCode {
      * 错误码
      */
     private String code;
+
     /**
      * 错误信息
      */

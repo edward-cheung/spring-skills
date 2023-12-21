@@ -23,6 +23,7 @@ public class CacheRedisCaffeineProperties {
      * 是否存储空值，默认true，防止缓存穿透
      */
     private boolean cacheNullValues = true;
+
     /**
      * 是否动态根据cacheName创建Cache的实现，默认true
      */
@@ -154,7 +155,7 @@ public class CacheRedisCaffeineProperties {
         /**
          * 由于权重需要缓存对象来提供，对于使用spring cache这种场景不是很适合，所以暂不支持配置
          */
-//        private long maximumWeight;
+        //private long maximumWeight;
         public long getExpireAfterAccess() {
             return expireAfterAccess;
         }

@@ -61,7 +61,7 @@ public class MailSenderUtil {
             helper.setText(mailBean.getText());
         } catch (MessagingException e) {
             logger.error("发送简易邮件异常", e);
-//            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
+            //WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
         mailSender.send(mimeMessage);
     }
@@ -83,7 +83,7 @@ public class MailSenderUtil {
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             logger.error("发送HTML邮件异常", e);
-//            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
+            //WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
 
@@ -134,7 +134,7 @@ public class MailSenderUtil {
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             logger.error("发送内联资源邮件异常", e);
-//            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
+            //WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
 
@@ -155,7 +155,7 @@ public class MailSenderUtil {
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             logger.error("发送模板邮件异常", e);
-//            WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
+            //WXRobotUtil.send(ExceptionUtil.stacktraceToString(e, 2000));
         }
     }
 }

@@ -68,7 +68,7 @@ public class HttpConnectionPoolUtil {
     private static final int MAX_ROUTE = 100; // 目标主机的最大连接数
     private final static Object SYNC_LOCK = new Object(); // 相当于线程锁,用于线程安全
     private static CloseableHttpClient httpClient; // 发送请求的客户端单例
-    private static PoolingHttpClientConnectionManager manager; //连接池管理类
+    private static PoolingHttpClientConnectionManager manager; // 连接池管理类
     private static ScheduledExecutorService monitorExecutor;
 
     public static CloseableHttpClient getHttpClient(String url) {
@@ -85,17 +85,17 @@ public class HttpConnectionPoolUtil {
             synchronized (SYNC_LOCK) {
                 if (httpClient == null) {
                     httpClient = createHttpClient(hostName, port);
-                    //开启监控线程,对异常和空闲线程进行关闭
+                    // 开启监控线程,对异常和空闲线程进行关闭
                     monitorExecutor = Executors.newScheduledThreadPool(1);
                     monitorExecutor.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                            //关闭异常连接
+                            // 关闭异常连接
                             manager.closeExpiredConnections();
-                            //关闭5s空闲的连接
+                            // 关闭5s空闲的连接
                             manager.closeIdleConnections(5000, TimeUnit.MILLISECONDS);
                             logger.info("close expired and idle for over 5s connection");
-                            //打印连接池使用情况
+                            // 打印连接池使用情况
                             if (logger.isDebugEnabled()) {
                                 final PoolStats poolStats = manager.getTotalStats();
                                 logger.debug("***********》关闭异常+空闲连接！ 空闲连接:"
@@ -126,51 +126,51 @@ public class HttpConnectionPoolUtil {
                 .build();
 
         manager = new PoolingHttpClientConnectionManager(registry);
-        //设置连接参数
+        // 设置连接参数
         manager.setMaxTotal(MAX_CONN); // 最大连接数
         manager.setDefaultMaxPerRoute(MAX_PRE_ROUTE); // 路由最大连接数
 
         HttpHost httpHost = new HttpHost(host, port);
         manager.setMaxPerRoute(new HttpRoute(httpHost), MAX_ROUTE); // 目标主机的最大连接数
 
-        //请求失败时,进行请求重试
+        // 请求失败时,进行请求重试
         HttpRequestRetryHandler handler = new HttpRequestRetryHandler() {
             @Override
             public boolean retryRequest(IOException e, int i, HttpContext httpContext) {
                 if (i > 3) {
-                    //重试超过3次,放弃请求
+                    // 重试超过3次,放弃请求
                     logger.error("retry has more than 3 time, give up request");
                     return false;
                 }
                 if (e instanceof NoHttpResponseException) {
-                    //服务器没有响应,可能是服务器断开了连接,应该重试
+                    // 服务器没有响应,可能是服务器断开了连接,应该重试
                     logger.error("receive no response from server, retry");
                     return true;
                 }
                 if (e instanceof SSLHandshakeException) {
-                    //SSL握手异常
+                    // SSL握手异常
                     logger.error("SSL hand shake exception");
                     return false;
                 }
                 if (e instanceof InterruptedIOException) {
-                    //超时
+                    // 超时
                     logger.error("InterruptedIOException");
                     return false;
                 }
                 if (e instanceof UnknownHostException) {
-                    //目标服务器不可达
+                    // 目标服务器不可达
                     logger.error("server host unknown");
                     return false;
                 }
                 if (e instanceof SSLException) {
-                    //SSL握手异常
+                    // SSL握手异常
                     logger.error("SSLException");
                     return false;
                 }
 
                 HttpClientContext context = HttpClientContext.adapt(httpContext);
                 HttpRequest request = context.getRequest();
-                //如果请求不是关闭连接的请求
+                // 如果请求不是关闭连接的请求
                 return !(request instanceof HttpEntityEnclosingRequest);
             }
         };

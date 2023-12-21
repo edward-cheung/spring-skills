@@ -15,7 +15,7 @@ public class CustomKeyGenerator implements KeyGenerator {
 
     @Override
     public Object generate(Object target, Method method, Object... params) {
-        //注意，这里不能返回null,否则会报错
+        // 注意，这里不能返回null,否则会报错
         String methodName = method.getName();
         if (methodName.startsWith("get")) {
             methodName = methodName.substring(3);

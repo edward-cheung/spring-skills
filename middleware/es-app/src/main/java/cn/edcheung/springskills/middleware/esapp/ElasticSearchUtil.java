@@ -77,7 +77,7 @@ public class ElasticSearchUtil {
                 return;
             }
 
-            //解析yml中的配置转化为HttpHost数组
+            // 解析yml中的配置转化为HttpHost数组
             String[] uriArr = uris.split(",");
             HttpHost[] httpHostArr = new HttpHost[uriArr.length];
             int i = 0;
@@ -87,7 +87,7 @@ public class ElasticSearchUtil {
                 }
 
                 try {
-                    //拆分出ip和端口号
+                    // 拆分出ip和端口号
                     String[] split = uri.split(":");
                     String host = split[0];
                     String port = split[1];
@@ -120,9 +120,9 @@ public class ElasticSearchUtil {
             logger.error("Index is  exits!");
             return false;
         }
-        //1.创建索引请求
+        // 1.创建索引请求
         CreateIndexRequest request = new CreateIndexRequest(index);
-        //2.执行客户端请求
+        // 2.执行客户端请求
         CreateIndexResponse response = restHighLevelClient.indices()
                 .create(request, RequestOptions.DEFAULT);
         return response.isAcknowledged();
@@ -190,13 +190,13 @@ public class ElasticSearchUtil {
         if (this.existsById(index, id)) {
             return this.updateDataByIdNoRealTime(object, index, id);
         }
-        //创建请求
+        // 创建请求
         IndexRequest request = new IndexRequest(index);
         request.id(id);
         request.timeout(TimeValue.timeValueSeconds(1));
-        //将数据放入请求 json
+        // 将数据放入请求 json
         request.source(JSON.toJSONString(object), XContentType.JSON);
-        //客户端发送请求
+        // 客户端发送请求
         IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);
         logger.info("添加数据成功 索引为: {}, response 状态: {}, id为: {}", index, response.status().getStatus(), response.getId());
         return response.getId();
@@ -252,15 +252,15 @@ public class ElasticSearchUtil {
      * @return
      */
     public String updateDataByIdNoRealTime(Object object, String index, String id) throws IOException {
-        //更新请求
+        // 更新请求
         UpdateRequest updateRequest = new UpdateRequest(index, id);
 
-        //保证数据实时更新
+        // 保证数据实时更新
         updateRequest.setRefreshPolicy("wait_for");
 
         updateRequest.timeout("1s");
         updateRequest.doc(JSON.toJSONString(object), XContentType.JSON);
-        //执行更新请求
+        // 执行更新请求
         UpdateResponse updateResponse = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
         logger.info("索引为: {}, id为: {},updateResponseID：{}, 实时更新数据成功", index, id, updateResponse.getId());
         return updateResponse.getId();
@@ -277,7 +277,7 @@ public class ElasticSearchUtil {
     public Map<String, Object> searchDataById(String index, String id, String fields) throws IOException {
         GetRequest request = new GetRequest(index, id);
         if (StringUtils.isNotEmpty(fields)) {
-            //只查询特定字段。如果需要查询所有字段则不设置该项。
+            // 只查询特定字段。如果需要查询所有字段则不设置该项。
             request.fetchSourceContext(new FetchSourceContext(true, fields.split(","), Strings.EMPTY_ARRAY));
         }
         GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);
@@ -293,7 +293,7 @@ public class ElasticSearchUtil {
      */
     public boolean existsById(String index, String id) throws IOException {
         GetRequest request = new GetRequest(index, id);
-        //不获取返回的_source的上下文
+        // 不获取返回的_source的上下文
         request.fetchSourceContext(new FetchSourceContext(false));
         request.storedFields("_none_");
         return restHighLevelClient.exists(request, RequestOptions.DEFAULT);
@@ -309,7 +309,7 @@ public class ElasticSearchUtil {
     public boolean bulkPost(String index, List<?> objects) {
         BulkRequest bulkRequest = new BulkRequest();
         BulkResponse response = null;
-        //最大数量不得超过20万
+        // 最大数量不得超过20万
         for (Object object : objects) {
             IndexRequest request = new IndexRequest(index);
             request.source(JSON.toJSONString(object), XContentType.JSON);
@@ -340,21 +340,21 @@ public class ElasticSearchUtil {
      * @param highlightField
      */
     private List<Map<String, Object>> setSearchResponse(SearchResponse searchResponse, String highlightField) {
-        //解析结果
+        // 解析结果
         ArrayList<Map<String, Object>> list = new ArrayList<>();
         for (SearchHit hit : searchResponse.getHits().getHits()) {
             Map<String, HighlightField> high = hit.getHighlightFields();
             HighlightField title = high.get(highlightField);
-            //原来的结果
+            // 原来的结果
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
-            //解析高亮字段,将原来的字段换为高亮字段
+            // 解析高亮字段,将原来的字段换为高亮字段
             if (title != null) {
                 Text[] texts = title.fragments();
                 StringBuilder nTitle = new StringBuilder();
                 for (Text text : texts) {
                     nTitle.append(text);
                 }
-                //替换
+                // 替换
                 sourceAsMap.put(highlightField, nTitle.toString());
             }
             list.add(sourceAsMap);
@@ -375,15 +375,15 @@ public class ElasticSearchUtil {
                                                     String highlightField) throws IOException {
         SearchRequest request = new SearchRequest(index);
 
-        //高亮
+        // 高亮
         HighlightBuilder highlight = new HighlightBuilder();
         highlight.field(highlightField);
-        //关闭多个高亮
+        // 关闭多个高亮
         highlight.requireFieldMatch(false);
         highlight.preTags("<span style='color:red'>");
         highlight.postTags("</span>");
         query.highlighter(highlight);
-        //不返回源数据。只有条数之类的数据。
+        // 不返回源数据。只有条数之类的数据。
         //builder.fetchSource(false);
         request.source(query);
         SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);

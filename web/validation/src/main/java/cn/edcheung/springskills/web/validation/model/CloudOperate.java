@@ -10,57 +10,72 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CloudOperate implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 菜单功能id
+     */
     private Long id;
+
     /**
      * 功能名称
      */
     @NotEmpty(message = "请填写功能名称")
     @Size(max = 20, message = "菜单功能最多20个字符")
     private String name;
+
     /**
      * 功能编码
      */
     @NotBlank(message = "请填写功能编码")
     @Size(max = 20, message = "菜单功能最多20个字符")
     private String code;
+
     /**
      * 功能跳转路径地址
      */
     @NotBlank(message = "请填写路径链接")
     @Size(max = 128, message = "路径链接超过限制长度")
     private String url;
+
     /**
      * 所属菜单code
      */
     @NotBlank(message = "请选择所属菜单")
     private String menuCode;
+
     /**
      * 所属菜单名称
      */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String menuName;
+
     /**
      * 状态：0禁用，1启用
      */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Boolean status;
+
     /**
      * 系统编码
      */
     @NotBlank(message = "系统编码为空")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String cloudCode;
+
     /**
      * 是否删除：0否，1是
      */
     @JsonIgnore
     private Boolean isDelete;
+
     /**
      * 创建日期
      */
     @JsonIgnore
     private Date gmtCreate;
+
     /**
      * 修改日期
      */

@@ -39,34 +39,39 @@ public class LocalIdWorker {
 
     private static final Logger logger = LoggerFactory.getLogger(LocalIdWorker.class);
 
-    //下面两个每个5位，加起来就是10位的工作机器id
-    private long workerId;    //机器id
-    private long datacenterId;   //数据中心id
+    // 下面两个每个5位，加起来就是10位的工作机器id
+    private long workerId; // 机器id
+    private long datacenterId; // 数据中心id
 
-    private long sequence;   //12位的序列号
+    private long sequence; // 12位的序列号
 
-    //初始时间戳(取一个离当前时间最近的,从此时间戳开始够用69年)
+    // 初始时间戳(取一个离当前时间最近的,从此时间戳开始够用69年)
     private long twepoch = 1600000000000L;
 
-    //长度为5位
+    // 长度为5位
     private long workerIdBits = 5L;
     private long datacenterIdBits = 5L;
-    //最大值
+
+    // 最大值
     private long maxWorkerId = ~(-1L << workerIdBits);
     private long maxDatacenterId = ~(-1L << datacenterIdBits);
-    //序列号id长度
+
+    // 序列号id长度
     private long sequenceBits = 12L;
-    //序列号最大值
+
+    // 序列号最大值
     private long sequenceMask = ~(-1L << sequenceBits);
 
-    //工作id需要左移的位数，12位
+    // 工作id需要左移的位数，12位
     private long workerIdShift = sequenceBits;
-    //数据id需要左移位数 12+5=17位
+
+    // 数据id需要左移位数 12+5=17位
     private long datacenterIdShift = sequenceBits + workerIdBits;
-    //时间戳需要左移位数 12+5+5=22位
+
+    // 时间戳需要左移位数 12+5+5=22位
     private long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
-    //上次时间戳，初始值为负数
+    // 上次时间戳，初始值为负数
     private long lastTimestamp = -1L;
 
     public LocalIdWorker() {
@@ -144,14 +149,14 @@ public class LocalIdWorker {
     public synchronized long nextId() {
         long timestamp = timeGen();
 
-        //获取当前时间戳如果小于上次时间戳，则表示时间戳获取出现异常
+        // 获取当前时间戳如果小于上次时间戳，则表示时间戳获取出现异常
         if (timestamp < lastTimestamp) {
             logger.error("clock is moving backwards.  Rejecting requests until {}.", lastTimestamp);
             throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds",
                     lastTimestamp - timestamp));
         }
 
-        //获取当前时间戳如果等于上次时间戳（同一毫秒内），则在序列号加一；否则序列号赋值为0，从0开始。
+        // 获取当前时间戳如果等于上次时间戳（同一毫秒内），则在序列号加一；否则序列号赋值为0，从0开始。
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & sequenceMask;
             if (sequence == 0) {
@@ -161,7 +166,7 @@ public class LocalIdWorker {
             sequence = 0;
         }
 
-        //将上次时间戳值刷新
+        // 将上次时间戳值刷新
         lastTimestamp = timestamp;
 
         /**
