@@ -21,9 +21,9 @@ public class CustomAsyncUncaughtExceptionHandler implements AsyncUncaughtExcepti
     public void handleUncaughtException(Throwable throwable, Method method, Object... params) {
         logger.error("异步多线程执行异常。方法：[{}]，异常信息[{}] : {}", method, throwable.getMessage(), throwable);
         if (throwable instanceof RuntimeException) {
-            throw (RuntimeException)throwable;
+            throw (RuntimeException) throwable;
         } else if (throwable instanceof Error) {
-            throw (Error)throwable;
+            throw (Error) throwable;
         } else {
             throw new RuntimeException(throwable);
         }

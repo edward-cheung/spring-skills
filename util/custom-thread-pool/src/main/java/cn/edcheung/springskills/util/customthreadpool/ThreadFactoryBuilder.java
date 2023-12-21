@@ -162,9 +162,9 @@ public class ThreadFactoryBuilder {
         public void uncaughtException(Thread t, Throwable e) {
             logger.error(t.toString() + "执行任务异常", e);
             if (e instanceof RuntimeException) {
-                throw (RuntimeException)e;
+                throw (RuntimeException) e;
             } else if (e instanceof Error) {
-                throw (Error)e;
+                throw (Error) e;
             } else {
                 throw new RuntimeException(e);
             }
